@@ -9,7 +9,7 @@ const searchInput = document.getElementById("search-input");
 const results = document.getElementById("results");
 const history = document.getElementById("history");
 const MAX_ATTEMPTS = 5;
-const FORCED_SOLUTION_NAME = null;
+const FORCED_SOLUTION_NAME = null
 
 const victoryModal = document.getElementById("victory-modal");
 const victoryMessage = document.getElementById("victory-message");
@@ -711,7 +711,7 @@ function hideVictoryModal() {
 
 function shareResult() {
   const resultText =
-    `Terraforming Mars Card Guess\n` +
+    `Terraforming Mars Cardle\n` +
     `You found the card: ${solutionCard.name}\n\n` +
     gameResult.join("\n");
 
