@@ -68,6 +68,14 @@
         >
           <img src="images/symbols/ff.png" alt="Give up">
         </button>
+        <button
+        id="random-card-button"
+        class="random-card-button"
+        type="button"
+        aria-label="Random move"
+        title="Random move">
+          <img src="images/symbols/random.png" alt="Random card">
+        </button>
       </div>
 
       <div id="results"></div>
@@ -170,17 +178,18 @@
       <p>
         Guess a Terraforming Mars card and see how it compares
         to the hidden card to find it! You have 5 guesses maximum.
-        <br>You can play the daily card or use the infinite mode in the menu to play a random card.
-        <br>Base + Prelude 1 project cards only.
+      </p>
+
+      <p>
+        Base + Prelude 1 project cards only.
       </p>
 
       <p>
         The "Tags" and "Effects" categories tell you what tags and effects
         are shared by your card and the hidden card.
-        A category is correct (green background) if it is exactly the same as the hidden card.
-        A category is partially correct (orange background) if it shares at least one item
+        A category is correct if it is exactly the same as the hidden card.
+        A category is partially correct if it shares at least one item
         with the hidden card.
-        A category is incorrect (red background) if it doesn't share any item with the hidden card.
       </p>
 
       <p>
@@ -189,7 +198,7 @@
         placing a special, city, greenery or ocean tile,
         raising temperature, raising oxygen, gaining 1 TR,
         drawing 1 card, adding a microbe or an animal to any card.
-        <br>Any card with an effect that is not one of these will have the "?"
+        Any card with an effect that is not one of these will have the "?"
         effect, for example: Land Claim or Invention Contest.
       </p>
 
@@ -201,15 +210,15 @@
 
       <p>
         Acquired Company counts as having the MC production effect 3 times.
-        Hackers counts as having the MC production effect 4 times (2 increases and 2 decreases).
+        Hackers counts as having the MC production effect 4 times.
+        Cards with variable effects like Cartel or Greenhouses count as having
+        any amount of MC production or plants.
       </p>
 
       <p>
-        Cards with variable effects like Cartel or Toll Station count as having
-        any amount of MC production.
-        <br>Sponsors and Acquired Company will show all 2 or 3 effects as correct
+        Sponsors and Acquired Company will show all effects as correct
         if the hidden card is Cartel, Satellites or Toll Station.
-        <br>Insects will show a unique "any Plant production" effect
+        Insects will show a unique "any Plant production" effect
         that will be correct if the hidden card has any amount
         of Plant production.
       </p>
