@@ -700,7 +700,7 @@ function hideVictoryModal() {
 function shareResult() {
   const resultText =
     `Terraforming Mars Card Guess\n` +
-    `You found the card: ${solutionCard.name}\n\n` +
+    `You found today's card!\n\n` +
     gameResult.join("\n");
 
   navigator.clipboard.writeText(resultText).then(() => {
