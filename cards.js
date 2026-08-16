@@ -606,7 +606,7 @@ const cards = [
     "name": "Rover Construction",
     "cost": 8,
     "color": "Blue",
-    "tags": [],
+    "tags": ["Building"],
     "effects": [],
     "image": "images/cards/Rover Construction.webp"
   },
