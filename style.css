@@ -1,0 +1,391 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma", sans-serif;
+  text-align: center;
+  background-color: #19162a;
+  color: white;
+}
+
+main {
+  width: 100%;
+  padding: 30px 20px;
+}
+
+.game-header {
+  display: grid;
+  grid-template-columns: 60px 1fr 60px;
+  align-items: center;
+
+  width: 100%;
+  min-height: 120px;
+  padding: 20px 30px;
+
+  background-color: #211d36;
+}
+
+.header-title {
+  text-align: center;
+}
+
+.header-title h1 {
+  margin: 0;
+  color: white;
+  font-size: 2.2rem;
+}
+
+.header-title p {
+  margin: 10px 0 0;
+  color: white;
+  font-size: 18px;
+}
+
+.header-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.header-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.header-button:hover img {
+  transform: scale(1.1);
+}
+
+.search-row {
+  position: relative;
+  width: 100%;
+  height: 55px;
+  margin-bottom: 10px;
+}
+
+#search-input {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: min(300px, 90%);
+  padding: 12px;
+
+  border: 1px solid #888;
+  border-radius: 4px;
+
+  font-family: inherit;
+  font-size: 16px;
+}
+
+#results {
+  width: min(326px, 90%);
+  margin: 0 auto;
+  text-align: left;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  width: 100%;
+  padding: 10px;
+
+  border: 1px solid #ccc;
+  background-color: #242424;
+  color: white;
+
+  cursor: pointer;
+  font-size: 16px;
+  text-align: left;
+}
+
+.card:hover {
+  background-color: #333;
+}
+
+.card.selected {
+  outline: 2px solid white;
+  background-color: #c1440e;
+}
+
+.card-preview-image {
+  width: 50px;
+  height: 70px;
+  flex-shrink: 0;
+
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.give-up-button,
+.new-game-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  padding: 5px;
+  border: none;
+  background: none;
+
+  cursor: pointer;
+}
+
+.give-up-button {
+  left: calc(50% + 160px);
+}
+
+.new-game-button {
+  right: calc(50% + 160px);
+}
+
+.give-up-button img,
+.new-game-button img {
+  width: 35px;
+  height: 35px;
+}
+
+.give-up-button:hover,
+.new-game-button:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+#cards-table {
+  width: 100%;
+  max-width: 1000px;
+  margin: 30px auto;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px;
+  border: 1px solid #9f9f9f;
+  text-align: center;
+}
+
+th {
+  background-color: #333;
+  color: white;
+}
+
+#cards-table td:first-child {
+  color: white;
+}
+
+.correct-info,
+.incorrect-info,
+.partial-info {
+  color: white;
+  font-weight: bold;
+}
+
+.correct-info {
+  background-color: #4caf50;
+}
+
+.incorrect-info {
+  background-color: #f44336;
+}
+
+.partial-info {
+  background-color: #ff9800;
+}
+
+td span {
+  margin-left: 5px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.history-card-image {
+  display: block;
+
+  width: 70px;
+  height: 98px;
+  margin: 0 auto 6px;
+
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.tag-container {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin: 4px;
+  vertical-align: middle;
+}
+
+.tag-image,
+.effect-image {
+  width: 32px;
+  height: 32px;
+  margin: 2px;
+  object-fit: contain;
+}
+
+.symbol-image {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  object-fit: contain;
+}
+
+.hidden,
+.modal.hidden,
+.new-game-button.hidden {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  max-width: 1000px;
+  padding: 30px;
+
+  border: 2px solid white;
+  border-radius: 12px;
+  background-color: #19162a;
+
+  text-align: center;
+}
+
+.modal-content h2 {
+  color: white;
+}
+
+#info-modal h2 {
+  font-weight: bold;
+  text-align: center;
+}
+
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+
+  padding: 0;
+  border: none;
+  background: none;
+
+  color: white;
+  cursor: pointer;
+  font-size: 28px;
+}
+
+.close-button:hover {
+  color: #ff9800;
+}
+
+.modal-content button:not(.close-button),
+.modal-actions button {
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.modal-content button:not(.close-button) {
+  margin: 8px;
+}
+
+.info-footer {
+  margin-top: 15px;
+  font-size: 0.8rem;
+  color: #a19f9f;
+  text-align: center;
+}
+
+.victory-card-image {
+  display: block;
+
+  width: 180px;
+  max-width: 100%;
+  max-height: 300px;
+  margin: 15px auto;
+
+  object-fit: contain;
+}
+
+.modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  margin-top: 15px;
+}
+
+.modal-actions button {
+  margin: 0;
+}
+
+#message {
+  margin-top: 30px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+@media (max-width: 800px) {
+  .game-header {
+    grid-template-columns: 50px 1fr 50px;
+    padding: 20px 15px;
+  }
+
+  .header-title h1 {
+    font-size: 1.8rem;
+  }
+
+  .header-title p {
+    font-size: 16px;
+  }
+
+  #cards-table {
+    font-size: 14px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+  }
+}

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TfM Cardle</title>
+
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="game-header">
+    <button
+      id="menu-button"
+      class="header-button"
+      type="button"
+      aria-label="Menu"
+      title="Menu"
+    >
+      <img src="images/symbols/menu.png" alt="">
+    </button>
+
+    <div class="header-title">
+      <h1>Terraforming Mars Cardle</h1>
+      <p>Guess the Terraforming Mars card</p>
+    </div>
+
+    <button
+      id="info-button"
+      class="header-button"
+      type="button"
+      aria-label="Information"
+      title="Info"
+    >
+      <img src="images/symbols/info.png" alt="">
+    </button>
+  </header>
+
+  <main>
+    <section class="game-area">
+      <div class="search-row">
+        <button
+          id="new-game-button"
+          class="new-game-button hidden"
+          type="button"
+          aria-label="New game"
+          title="New game"
+        >
+          <img src="images/symbols/restart.png" alt="New game">
+        </button>
+
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Guess a card"
+          autocomplete="off"
+          autofocus
+        >
+
+        <button
+          id="give-up-button"
+          class="give-up-button"
+          type="button"
+          aria-label="Give up"
+          title="Give up"
+        >
+          <img src="images/symbols/ff.png" alt="Give up">
+        </button>
+      </div>
+
+      <div id="results"></div>
+
+      <table id="cards-table">
+        <thead>
+          <tr>
+            <th scope="col">Card</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Color</th>
+            <th scope="col">Tags</th>
+            <th scope="col">Effects</th>
+          </tr>
+        </thead>
+
+        <tbody id="history"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <div
+    id="victory-modal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="victory-title"
+  >
+    <div class="modal-content">
+      <h2 id="victory-title">Victory!</h2>
+
+      <img
+        id="victory-card-image"
+        class="victory-card-image"
+        alt="Victory card"
+      >
+
+      <p id="victory-message"></p>
+
+      <div class="modal-actions">
+        <button id="share-button" type="button">
+          Share result
+        </button>
+
+        <button id="close-button" type="button">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="defeat-modal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="defeat-title"
+  >
+    <div class="modal-content">
+      <h2 id="defeat-title">Defeat</h2>
+
+      <p>
+        The answer was:
+        <strong id="defeat-message"></strong>
+      </p>
+
+      <img
+        id="defeat-card-image"
+        class="victory-card-image"
+        alt="Solution card"
+      >
+
+      <button
+        id="close-defeat-button"
+        type="button"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="info-modal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="info-title"
+  >
+    <div class="modal-content">
+      <button
+        id="close-info"
+        class="close-button"
+        type="button"
+        aria-label="Close information"
+      >
+        ×
+      </button>
+
+      <h2 id="info-title">How to play</h2>
+
+      <p>
+        Guess a Terraforming Mars card and see how it compares
+        to the hidden card to find it! You have 5 guesses maximum.
+      </p>
+
+      <p>
+        Base + Prelude 1 project cards only.
+      </p>
+
+      <p>
+        The "Tags" and "Effects" categories tell you what tags and effects
+        are shared by your card and the hidden card.
+        A category is correct if it is exactly the same as the hidden card.
+        A category is partially correct if it shares at least one item
+        with the hidden card.
+      </p>
+
+      <p>
+        All possible effects are: gaining or removing any standard resource,
+        increasing or decreasing any production of any standard resource,
+        placing a special, city, greenery or ocean tile,
+        raising temperature, raising oxygen, gaining 1 TR,
+        drawing 1 card, adding a microbe or an animal to any card.
+        Any card with an effect that is not one of these will have the "?"
+        effect, for example: Land Claim or Invention Contest.
+      </p>
+
+      <p>
+        Effects only count if they are part of the immediate effect
+        or the action of the card.
+        Permanent effects like Arctic Algae or Mars University don't count.
+      </p>
+
+      <p>
+        Acquired Company counts as having the MC production effect 3 times.
+        Hackers counts as having the MC production effect 4 times.
+        Cards with variable effects like Cartel or Greenhouses count as having
+        any amount of MC production or plants.
+      </p>
+
+      <p>
+        Sponsors and Acquired Company will show all effects as correct
+        if the hidden card is Cartel, Satellites or Toll Station.
+        Insects will show a unique "any Plant production" effect
+        that will be correct if the hidden card has any amount
+        of Plant production.
+      </p>
+
+      <p>
+        All possible effects of a card are used.
+        For example, Nitrogen-Rich Asteroid has 4 plant production effects,
+        Imported Hydrogen has plants, microbes and animals,
+        and Hired Raiders has 4 steel and 6 MC.
+      </p>
+
+      <p>
+        Robotic Workforce counts as having any amount of MC,
+        2 steel, 1 titanium, 2 plant, 4 power and 4 heat productions.
+      </p>
+      <p class="info-footer">
+        Huge thanks to OrrinW01 from Reddit for their work on the card images available at 
+        <a href="https://tm.hadronikle.com" target="_blank" rel="noopener noreferrer">
+          https://tm.hadronikle.com
+        </a>
+        <br>Resource, tile and tag images downloaded from 
+        <a href="https://ssimeonoff.github.io/cards-list" target="_blank" rel="noopener noreferrer">
+          https://ssimeonoff.github.io/cards-list
+        </a>
+        <br>Suggestions and bug reports are always welcome, please send them to Abstein on Discord
+      </p>
+    </div>
+  </div>
+
+  <div
+    id="menu-modal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="menu-title"
+  >
+    <div class="modal-content">
+      <button
+        id="close-menu"
+        class="close-button"
+        type="button"
+        aria-label="Close menu"
+      >
+        ×
+      </button>
+
+      <h2 id="menu-title">Game mode</h2>
+
+      <button id="daily-mode" type="button">
+        Daily
+      </button>
+
+      <button id="infinite-mode" type="button">
+        Infinite
+      </button>
+
+      <p id="current-mode"></p>
+    </div>
+  </div>
+
+  <script src="cards.js"></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
