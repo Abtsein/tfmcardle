@@ -9,6 +9,7 @@ const searchInput = document.getElementById("search-input");
 const results = document.getElementById("results");
 const history = document.getElementById("history");
 const MAX_ATTEMPTS = 5;
+const FORCED_SOLUTION_NAME = null;
 
 const victoryModal = document.getElementById("victory-modal");
 const victoryMessage = document.getElementById("victory-message");
@@ -295,6 +296,16 @@ function startGame() {
 }
 
 function getSolutionCard() {
+  if (FORCED_SOLUTION_NAME) {
+    const forcedCard = cards.find(
+      card => card.name === FORCED_SOLUTION_NAME
+    );
+
+    if (forcedCard) {
+      return forcedCard;
+    }
+  }
+
   return gameMode === "daily"
     ? getDailyCard()
     : getRandomCard();
@@ -621,9 +632,10 @@ function compareEffects(proposedEffects, solutionEffects) {
   );
 
   const isFullyCorrect =
-    proposedEffects.length > 0 &&
+    proposedEffects.length === solutionEffects.length &&
     correctCount === proposedEffects.length &&
     unmatchedConcreteEffects.length === 0;
+
 
   return {
     correctCount,
@@ -700,7 +712,7 @@ function hideVictoryModal() {
 function shareResult() {
   const resultText =
     `Terraforming Mars Card Guess\n` +
-    `You found today's card!\n\n` +
+    `You found the card: ${solutionCard.name}\n\n` +
     gameResult.join("\n");
 
   navigator.clipboard.writeText(resultText).then(() => {
