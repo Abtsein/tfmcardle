@@ -1,6 +1,6 @@
 let solutionCard;
 let attempts = 0;
-let gameMode = localStorage.getItem("gameMode") || "daily";
+let gameMode = localStorage.getItem("gameMode") || "infinite";
 let gameResult = [];
 let selectedIndex = -1;
 
