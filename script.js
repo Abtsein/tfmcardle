@@ -9,7 +9,7 @@ const searchInput = document.getElementById("search-input");
 const results = document.getElementById("results");
 const history = document.getElementById("history");
 const MAX_ATTEMPTS = 5;
-const FORCED_SOLUTION_NAME = null
+const FORCED_SOLUTION_NAME = null;
 
 const victoryModal = document.getElementById("victory-modal");
 const victoryMessage = document.getElementById("victory-message");
@@ -36,6 +36,7 @@ const currentModeText = document.getElementById("current-mode");
 
 const giveUpButton = document.getElementById("give-up-button");
 const newGameButton = document.getElementById("new-game-button");
+const randomCardButton = document.getElementById("random-card-button");
 
 const tagImages = {
   Building: "images/tags/building.png",
@@ -123,6 +124,8 @@ function setupEventListeners() {
   defeatModal.addEventListener("click", handleDefeatOutsideClick);
 
   newGameButton.addEventListener("click", startNewGame);
+
+  randomCardButton.addEventListener("click", handleRandomCardClick);
 }
 
 function openMenu() {
@@ -291,6 +294,7 @@ function startGame() {
   hideVictoryModal();
   hideDefeatModal();
   showGiveUpButton();
+  showRandomButton();
 
   searchInput.focus();
 }
@@ -701,6 +705,7 @@ function showVictoryModal() {
   victoryModal.classList.add("show");
 
   hideGiveUpButton();
+  hideRandomButton();
   updateNewGameButton();
 }
 
@@ -750,6 +755,7 @@ function showDefeatModal() {
 
   updateNewGameButton();
   hideGiveUpButton();
+  hideRandomButton();
 }
 
 function hideDefeatModal() {
@@ -790,6 +796,23 @@ function hideGiveUpButton() {
 
 function showGiveUpButton() {
   giveUpButton.classList.remove("hidden");
+}
+
+function hideRandomButton() {
+  randomCardButton.classList.add("hidden");
+}
+
+function showRandomButton() {
+  randomCardButton.classList.remove("hidden");
+}
+
+function handleRandomCardClick() {
+  if (searchInput.disabled || attempts >= MAX_ATTEMPTS) {
+    return;
+  }
+
+  const randomCard = getRandomCard();
+  selectCard(randomCard);
 }
 
 initializeGame();
