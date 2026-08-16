@@ -710,10 +710,21 @@ function hideVictoryModal() {
 }
 
 function shareResult() {
-  const resultText =
-    `Terraforming Mars Cardle\n` +
-    `You found the card: ${solutionCard.name}\n\n` +
-    gameResult.join("\n");
+  let resultText;
+
+  if (gameMode === "infinite") {
+    resultText =
+      `Terraforming Mars Cardle
+You found the card: ${solutionCard.name}
+
+${gameResult.join("\n")}`;
+  } else {
+    resultText =
+      `Terraforming Mars Cardle
+You found today's card!
+
+${gameResult.join("\n")}`;
+  }
 
   navigator.clipboard.writeText(resultText).then(() => {
     shareButton.textContent = "Copied to clipboard!";
@@ -723,6 +734,7 @@ function shareResult() {
 function closeVictoryModal() {
   victoryModal.classList.remove("show");
   victoryModal.classList.add("hidden");
+  shareButton.textContent = "Share result";
 }
 
 function showDefeatModal() {
