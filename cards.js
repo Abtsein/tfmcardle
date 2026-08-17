@@ -629,7 +629,7 @@ const cards = [
     "cost": 8,
     "color": "Blue",
     "tags": [
-      "None"
+      "Building"
     ],
     "effects": [
       "MC",
