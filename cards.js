@@ -268,7 +268,7 @@ const cards = [
   {
     "name": "Aerobraked Ammonia Asteroid",
     "cost": 26,
-    "color": "Green",
+    "color": "Red",
     "tags": [
       "Space"
     ],
