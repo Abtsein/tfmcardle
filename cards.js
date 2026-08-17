@@ -355,7 +355,7 @@ const cards = [
   },
   {
     "name": "Steelworks",
-    "cost": 13,
+    "cost": 15,
     "color": "Blue",
     "tags": [
       "Building"
