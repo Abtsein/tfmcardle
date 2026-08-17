@@ -226,15 +226,15 @@ th {
 }
 
 .correct-info {
-  background-color: #4caf50;
+  background-color: #72de75;
 }
 
 .incorrect-info {
-  background-color: #f44336;
+  background-color: #de645b;
 }
 
 .partial-info {
-  background-color: #ff9800;
+  background-color: #eca946;
 }
 
 td span {
@@ -265,7 +265,8 @@ td span {
 }
 
 .tag-image,
-.effect-image {
+.effect-image,
+.requirement-image {
   width: 32px;
   height: 32px;
   margin: 2px;
@@ -429,4 +430,12 @@ td span {
   td {
     padding: 8px;
   }
+}
+
+.card-cost,
+.card-color {
+  font-family: "Rajdhani", sans-serif;
+  color: black;
+  font-weight: 700;
+  font-size: 25px;
 }

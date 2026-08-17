@@ -49,23 +49,38 @@ const tagImages = {
   Plant: "images/tags/plant.png",
   Microbe: "images/tags/microbe.png",
   Animal: "images/tags/animal.png",
-  Wild: "images/tags/wild.png"
+  Wild: "images/tags/wild.png",
+  None: "images/symbols/none.png"
 };
 
 const effectImages = {
-  MC: "images/effects/megacredit.png",
+  MC: "images/effects/mc.png",
   Steel: "images/effects/steel.png",
   Titanium: "images/effects/titanium.png",
   Plant: "images/effects/plant.png",
   Power: "images/effects/power.png",
   Heat: "images/effects/heat.png",
 
-  MCprod: "images/effects/megacredit_prod.png",
+  MCprod: "images/effects/mc_prod.png",
   Steelprod: "images/effects/steel_prod.png",
   Titaniumprod: "images/effects/titanium_prod.png",
   Plantprod: "images/effects/plant_prod.png",
   Powerprod: "images/effects/power_prod.png",
   Heatprod: "images/effects/heat_prod.png",
+
+  negMC: "images/effects/mc_neg.png",
+  negSteel: "images/effects/steel_neg.png",
+  negTitanium: "images/effects/titanium_neg.png",
+  negPlant: "images/effects/plant_neg.png",
+  negPower: "images/effects/power_neg.png",
+  negHeat: "images/effects/heat_neg.png",
+
+  negMCprod: "images/effects/mc_neg_prod.png",
+  negSteelprod: "images/effects/steel_neg_prod.png",
+  negTitaniumprod: "images/effects/titanium_neg_prod.png",
+  negPlantprod: "images/effects/plant_neg_prod.png",
+  negPowerprod: "images/effects/power_neg_prod.png",
+  negHeatprod: "images/effects/heat_neg_prod.png",
 
   Special: "images/effects/special.png",
   City: "images/effects/city.png",
@@ -78,16 +93,19 @@ const effectImages = {
   Microbe: "images/effects/microbe.png",
   Animal: "images/effects/animal.png",
   Card: "images/effects/card.png",
-  Other: "images/effects/other.png",
+  Reduction: "images/effects/reduction.png",
+  VP: "images/effects/VP.png",
+  Other: "images/symbols/other.png",
+  None: "images/symbols/none.png"
+};
 
-  anyHeatprod: "images/effects/any_heat_prod.png",
-  anyMC: "images/effects/any_megacredit.png",
-  anyMCprod: "images/effects/any_megacredit_prod.png",
-  anyPlant: "images/effects/any_plant.png",
-  anyPlantprod: "images/effects/any_plant_prod.png",
-  anyPowerprod: "images/effects/any_power_prod.png",
-  anyPower: "images/effects/any_power.png",
-  anyTR: "images/effects/any_TR.png"
+const requirementImages = {
+  Temperature: "images/effects/temperature.png",
+  Oxygen: "images/effects/oxygen.png",
+  Oceans: "images/effects/ocean.png",
+  Tags: "images/tags/wild.png",
+  Other: "images/symbols/other.png",
+  None: "images/symbols/none.png"
 };
 
 function initializeGame() {
@@ -336,6 +354,7 @@ function addGuess(card) {
   row.appendChild(createNameCell(card));
   row.appendChild(createCostCell(card));
   row.appendChild(createColorCell(card));
+  row.appendChild(createRequirementCell(card));
   row.appendChild(createTagsCell(card));
   row.appendChild(createEffectsCell(card));
 
@@ -350,11 +369,7 @@ function createNameCell(card) {
   image.alt = card.name;
   image.classList.add("history-card-image");
 
-  const name = document.createElement("div");
-  name.textContent = card.name;
-
   cell.appendChild(image);
-  cell.appendChild(name);
 
   return cell;
 }
@@ -362,6 +377,7 @@ function createNameCell(card) {
 function createCostCell(card) {
   const cell = document.createElement("td");
   cell.textContent = card.cost;
+  cell.classList.add("card-cost");
 
   if (card.cost === solutionCard.cost) {
     cell.classList.add("correct-info");
@@ -381,9 +397,29 @@ function createCostCell(card) {
 function createColorCell(card) {
   const cell = document.createElement("td");
   cell.textContent = card.color;
+  cell.classList.add("card-color");
 
   cell.classList.add(
     card.color === solutionCard.color
+      ? "correct-info"
+      : "incorrect-info"
+  );
+
+  return cell;
+}
+
+function createRequirementCell(card) {
+  const cell = document.createElement("td");
+
+  const img = document.createElement("img");
+  img.src = requirementImages[card.requirement] || requirementImages["None"];
+  img.alt = card.requirement;
+  img.title = card.requirement;
+  img.classList.add("requirement-image");
+  cell.appendChild(img);
+
+  cell.classList.add(
+    card.requirement === solutionCard.requirement
       ? "correct-info"
       : "incorrect-info"
   );
@@ -455,9 +491,6 @@ function displayTags(cell, tags, solutionTags) {
 function displayEffects(cell, effects, solutionEffects) {
   const usedSolutionIndexes = new Set();
   const shownIncorrectEffects = new Set();
-  const anyEffectsInSolution = solutionEffects.filter(effect =>
-    effect.startsWith("any")
-  );
 
   effects.forEach(effect => {
     let matched = false;
@@ -466,38 +499,11 @@ function displayEffects(cell, effects, solutionEffects) {
     for (let index = 0; index < solutionEffects.length; index++) {
       if (
         !usedSolutionIndexes.has(index) &&
-        !solutionEffects[index].startsWith("any") &&
         solutionEffects[index] === effect
       ) {
         matchingIndex = index;
         matched = true;
         break;
-      }
-    }
-
-    if (!matched) {
-      const baseEffect = baseEffectName(effect);
-
-      matched = anyEffectsInSolution.some(
-        anyEffect => baseEffectName(anyEffect) === baseEffect
-      );
-    }
-
-    if (!matched && effect.startsWith("any")) {
-      const baseEffect = baseEffectName(effect);
-
-      for (let index = 0; index < solutionEffects.length; index++) {
-        if (
-          !usedSolutionIndexes.has(index) &&
-          (
-            solutionEffects[index] === baseEffect ||
-            solutionEffects[index] === effect
-          )
-        ) {
-          matchingIndex = index;
-          matched = true;
-          break;
-        }
       }
     }
 
@@ -588,7 +594,6 @@ function compareEffects(proposedEffects, solutionEffects) {
     for (let index = 0; index < solutionEffects.length; index++) {
       if (
         !usedSolutionIndexes.has(index) &&
-        !solutionEffects[index].startsWith("any") &&
         solutionEffects[index] === proposedEffect
       ) {
         usedSolutionIndexes.add(index);
@@ -597,60 +602,20 @@ function compareEffects(proposedEffects, solutionEffects) {
       }
     }
 
-    if (!matched) {
-      const proposedBaseEffect = baseEffectName(proposedEffect);
-
-      matched = solutionEffects.some(solutionEffect =>
-        solutionEffect.startsWith("any") &&
-        baseEffectName(solutionEffect) === proposedBaseEffect
-      );
-    }
-
-    if (!matched && proposedEffect.startsWith("any")) {
-      const proposedBaseEffect = baseEffectName(proposedEffect);
-
-      for (let index = 0; index < solutionEffects.length; index++) {
-        if (
-          !usedSolutionIndexes.has(index) &&
-          (
-            solutionEffects[index] === proposedBaseEffect ||
-            solutionEffects[index] === proposedEffect
-          )
-        ) {
-          usedSolutionIndexes.add(index);
-          matched = true;
-          break;
-        }
-      }
-    }
-
     if (matched) {
       correctCount++;
     }
   });
 
-  const unmatchedConcreteEffects = solutionEffects.filter(
-    (solutionEffect, index) =>
-      !solutionEffect.startsWith("any") &&
-      !usedSolutionIndexes.has(index)
-  );
-
   const isFullyCorrect =
     proposedEffects.length === solutionEffects.length &&
     correctCount === proposedEffects.length &&
-    unmatchedConcreteEffects.length === 0;
-
+    usedSolutionIndexes.size === solutionEffects.length;
 
   return {
     correctCount,
     isFullyCorrect
   };
-}
-
-function baseEffectName(effect) {
-  return effect.startsWith("any")
-    ? effect.slice(3)
-    : effect;
 }
 
 function countOccurrences(array) {

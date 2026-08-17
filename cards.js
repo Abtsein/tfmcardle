@@ -8,16 +8,11 @@ const cards = [
       "Energy"
     ],
     "effects": [
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
+      "negMC",
       "Powerprod"
     ],
-    "image": "images/cards/Space Mirrors.webp"
+    "image": "images/cards/Space Mirrors.webp",
+    "requirement": "None"
   },
   {
     "name": "Comet",
@@ -27,13 +22,12 @@ const cards = [
       "Space"
     ],
     "effects": [
-      "Temperature",
       "Ocean",
-      "Plant",
-      "Plant",
-      "Plant"
+      "Temperature",
+      "negPlant"
     ],
-    "image": "images/cards/Comet.webp"
+    "image": "images/cards/Comet.webp",
+    "requirement": "None"
   },
   {
     "name": "Mining Area",
@@ -43,11 +37,12 @@ const cards = [
       "Building"
     ],
     "effects": [
+      "Special",
       "Steelprod",
-      "Titaniumprod",
-      "Special"
+      "Titaniumprod"
     ],
-    "image": "images/cards/Mining Area.webp"
+    "image": "images/cards/Mining Area.webp",
+    "requirement": "None"
   },
   {
     "name": "Windmills",
@@ -58,9 +53,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Powerprod"
+      "Powerprod",
+      "VP"
     ],
-    "image": "images/cards/Windmills.webp"
+    "image": "images/cards/Windmills.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Equatorial Magnetizer",
@@ -70,10 +67,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Powerprod",
+      "negPowerprod",
       "TR"
     ],
-    "image": "images/cards/Equatorial Magnetizer.webp"
+    "image": "images/cards/Equatorial Magnetizer.webp",
+    "requirement": "None"
   },
   {
     "name": "Urbanized Area",
@@ -84,12 +82,12 @@ const cards = [
       "City"
     ],
     "effects": [
-      "Powerprod",
-      "MCprod",
+      "negPowerprod",
       "MCprod",
       "City"
     ],
-    "image": "images/cards/Urbanized Area.webp"
+    "image": "images/cards/Urbanized Area.webp",
+    "requirement": "None"
   },
   {
     "name": "Mars University",
@@ -99,8 +97,13 @@ const cards = [
       "Science",
       "Building"
     ],
-    "effects": [],
-    "image": "images/cards/Mars University.webp"
+    "effects": [
+      "Other",
+      "Card",
+      "VP"
+    ],
+    "image": "images/cards/Mars University.webp",
+    "requirement": "None"
   },
   {
     "name": "Power Supply Consortium",
@@ -111,9 +114,10 @@ const cards = [
     ],
     "effects": [
       "Powerprod",
-      "Powerprod"
+      "negPowerprod"
     ],
-    "image": "images/cards/Power Supply Consortium.webp"
+    "image": "images/cards/Power Supply Consortium.webp",
+    "requirement": "Tags"
   },
   {
     "name": "Archaebacteria",
@@ -125,7 +129,8 @@ const cards = [
     "effects": [
       "Plantprod"
     ],
-    "image": "images/cards/Archaebacteria.webp"
+    "image": "images/cards/Archaebacteria.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Deep Well Heating",
@@ -139,7 +144,8 @@ const cards = [
       "Powerprod",
       "Temperature"
     ],
-    "image": "images/cards/Deep Well Heating.webp"
+    "image": "images/cards/Deep Well Heating.webp",
+    "requirement": "None"
   },
   {
     "name": "Space Elevator",
@@ -150,15 +156,13 @@ const cards = [
       "Space"
     ],
     "effects": [
+      "negSteel",
       "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "Steel",
-      "Titaniumprod"
+      "Titaniumprod",
+      "VP"
     ],
-    "image": "images/cards/Space Elevator.webp"
+    "image": "images/cards/Space Elevator.webp",
+    "requirement": "None"
   },
   {
     "name": "Symbiotic Fungus",
@@ -170,7 +174,8 @@ const cards = [
     "effects": [
       "Microbe"
     ],
-    "image": "images/cards/Symbiotic Fungus.webp"
+    "image": "images/cards/Symbiotic Fungus.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Cupola City",
@@ -181,13 +186,12 @@ const cards = [
       "City"
     ],
     "effects": [
-      "Powerprod",
-      "MCprod",
-      "MCprod",
+      "negPowerprod",
       "MCprod",
       "City"
     ],
-    "image": "images/cards/Cupola City.webp"
+    "image": "images/cards/Cupola City.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Bushes",
@@ -198,21 +202,23 @@ const cards = [
     ],
     "effects": [
       "Plant",
-      "Plant",
-      "Plantprod",
       "Plantprod"
     ],
-    "image": "images/cards/Bushes.webp"
+    "image": "images/cards/Bushes.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Indentured Workers",
     "cost": 0,
     "color": "Red",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
       "Other"
     ],
-    "image": "images/cards/Indentured Workers.webp"
+    "image": "images/cards/Indentured Workers.webp",
+    "requirement": "None"
   },
   {
     "name": "Miranda Resort",
@@ -223,9 +229,11 @@ const cards = [
       "Jovian"
     ],
     "effects": [
-      "anyMCprod"
+      "MCprod",
+      "VP"
     ],
-    "image": "images/cards/Miranda Resort.webp"
+    "image": "images/cards/Miranda Resort.webp",
+    "requirement": "None"
   },
   {
     "name": "Lightning Harvest",
@@ -235,10 +243,12 @@ const cards = [
       "Energy"
     ],
     "effects": [
+      "Powerprod",
       "MCprod",
-      "Powerprod"
+      "VP"
     ],
-    "image": "images/cards/Lightning Harvest.webp"
+    "image": "images/cards/Lightning Harvest.webp",
+    "requirement": "Tags"
   },
   {
     "name": "Peroxide Power",
@@ -249,11 +259,11 @@ const cards = [
       "Energy"
     ],
     "effects": [
-      "MCprod",
-      "Powerprod",
+      "negMCprod",
       "Powerprod"
     ],
-    "image": "images/cards/Peroxide Power.webp"
+    "image": "images/cards/Peroxide Power.webp",
+    "requirement": "None"
   },
   {
     "name": "Aerobraked Ammonia Asteroid",
@@ -264,13 +274,11 @@ const cards = [
     ],
     "effects": [
       "Microbe",
-      "Microbe",
-      "Heatprod",
-      "Heatprod",
       "Heatprod",
       "Plantprod"
     ],
-    "image": "images/cards/Aerobraked Ammonia Asteroid.webp"
+    "image": "images/cards/Aerobraked Ammonia Asteroid.webp",
+    "requirement": "None"
   },
   {
     "name": "Rad-Chem Factory",
@@ -280,11 +288,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Powerprod",
-      "TR",
+      "negPowerprod",
       "TR"
     ],
-    "image": "images/cards/Rad-Chem Factory.webp"
+    "image": "images/cards/Rad-Chem Factory.webp",
+    "requirement": "None"
   },
   {
     "name": "Space Hotels",
@@ -295,12 +303,10 @@ const cards = [
       "Space"
     ],
     "effects": [
-      "MCprod",
-      "MCprod",
-      "MCprod",
       "MCprod"
     ],
-    "image": "images/cards/Space Hotels.webp"
+    "image": "images/cards/Space Hotels.webp",
+    "requirement": "Tags"
   },
   {
     "name": "Ants",
@@ -310,10 +316,11 @@ const cards = [
       "Microbe"
     ],
     "effects": [
-      "Microbe",
+      "VP",
       "Microbe"
     ],
-    "image": "images/cards/Ants.webp"
+    "image": "images/cards/Ants.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Cartel",
@@ -323,9 +330,10 @@ const cards = [
       "Earth"
     ],
     "effects": [
-      "anyMCprod"
+      "MCprod"
     ],
-    "image": "images/cards/Cartel.webp"
+    "image": "images/cards/Cartel.webp",
+    "requirement": "None"
   },
   {
     "name": "Heather",
@@ -338,7 +346,8 @@ const cards = [
       "Plant",
       "Plantprod"
     ],
-    "image": "images/cards/Heather.webp"
+    "image": "images/cards/Heather.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Lagrange Observatory",
@@ -349,9 +358,11 @@ const cards = [
       "Science"
     ],
     "effects": [
-      "Card"
+      "Card",
+      "VP"
     ],
-    "image": "images/cards/Lagrange Observatory.webp"
+    "image": "images/cards/Lagrange Observatory.webp",
+    "requirement": "None"
   },
   {
     "name": "Steelworks",
@@ -361,15 +372,12 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Power",
-      "Power",
-      "Power",
-      "Power",
-      "Steel",
+      "negPower",
       "Steel",
       "Oxygen"
     ],
-    "image": "images/cards/Steelworks.webp"
+    "image": "images/cards/Steelworks.webp",
+    "requirement": "None"
   },
   {
     "name": "Martian Survey",
@@ -380,9 +388,10 @@ const cards = [
     ],
     "effects": [
       "Card",
-      "Card"
+      "VP"
     ],
-    "image": "images/cards/Martian Survey.webp"
+    "image": "images/cards/Martian Survey.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Trans-Neptune Probe",
@@ -392,38 +401,39 @@ const cards = [
       "Science",
       "Space"
     ],
-    "effects": [],
-    "image": "images/cards/Trans-Neptune Probe.webp"
+    "effects": [
+      "VP"
+    ],
+    "image": "images/cards/Trans-Neptune Probe.webp",
+    "requirement": "None"
   },
   {
     "name": "Local Heat Trapping",
     "cost": 1,
     "color": "Red",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
-      "Heat",
-      "Heat",
-      "Heat",
-      "Heat",
-      "Heat",
+      "negHeat",
       "Plant",
-      "Plant",
-      "Plant",
-      "Plant",
-      "Animal",
       "Animal"
     ],
-    "image": "images/cards/Local Heat Trapping.webp"
+    "image": "images/cards/Local Heat Trapping.webp",
+    "requirement": "None"
   },
   {
     "name": "Permafrost Extraction",
     "cost": 8,
     "color": "Red",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
       "Ocean"
     ],
-    "image": "images/cards/Permafrost Extraction.webp"
+    "image": "images/cards/Permafrost Extraction.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Imported Hydrogen",
@@ -434,17 +444,13 @@ const cards = [
       "Earth"
     ],
     "effects": [
-      "Ocean",
       "Plant",
-      "Plant",
-      "Plant",
-      "Microbe",
-      "Microbe",
       "Microbe",
       "Animal",
-      "Animal"
+      "Ocean"
     ],
-    "image": "images/cards/Imported Hydrogen.webp"
+    "image": "images/cards/Imported Hydrogen.webp",
+    "requirement": "None"
   },
   {
     "name": "Fusion Power",
@@ -456,11 +462,10 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Powerprod",
-      "Powerprod",
       "Powerprod"
     ],
-    "image": "images/cards/Fusion Power.webp"
+    "image": "images/cards/Fusion Power.webp",
+    "requirement": "Tags"
   },
   {
     "name": "Nitrogen-Rich Asteroid",
@@ -471,14 +476,11 @@ const cards = [
     ],
     "effects": [
       "Plantprod",
-      "Plantprod",
-      "Plantprod",
-      "Plantprod",
-      "TR",
       "TR",
       "Temperature"
     ],
-    "image": "images/cards/Nitrogen-Rich Asteroid.webp"
+    "image": "images/cards/Nitrogen-Rich Asteroid.webp",
+    "requirement": "None"
   },
   {
     "name": "Interstellar Colony Ship",
@@ -488,19 +490,25 @@ const cards = [
       "Space",
       "Earth"
     ],
-    "effects": [],
-    "image": "images/cards/Interstellar Colony Ship.webp"
+    "effects": [
+      "VP"
+    ],
+    "image": "images/cards/Interstellar Colony Ship.webp",
+    "requirement": "Tags"
   },
   {
     "name": "Insulation",
     "cost": 2,
     "color": "Green",
-    "tags": [],
-    "effects": [
-      "anyHeatprod",
-      "anyMCprod"
+    "tags": [
+      "None"
     ],
-    "image": "images/cards/Insulation.webp"
+    "effects": [
+      "negHeatprod",
+      "MCprod"
+    ],
+    "image": "images/cards/Insulation.webp",
+    "requirement": "None"
   },
   {
     "name": "Building Industries",
@@ -510,11 +518,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Powerprod",
-      "Steelprod",
+      "negPowerprod",
       "Steelprod"
     ],
-    "image": "images/cards/Building Industries.webp"
+    "image": "images/cards/Building Industries.webp",
+    "requirement": "None"
   },
   {
     "name": "Research Outpost",
@@ -526,17 +534,24 @@ const cards = [
       "City"
     ],
     "effects": [
+      "Reduction",
       "City"
     ],
-    "image": "images/cards/Research Outpost.webp"
+    "image": "images/cards/Research Outpost.webp",
+    "requirement": "None"
   },
   {
     "name": "Dust Seals",
     "cost": 2,
     "color": "Green",
-    "tags": [],
-    "effects": [],
-    "image": "images/cards/Dust Seals.webp"
+    "tags": [
+      "None"
+    ],
+    "effects": [
+      "VP"
+    ],
+    "image": "images/cards/Dust Seals.webp",
+    "requirement": "Oceans"
   },
   {
     "name": "Immigrant City",
@@ -548,11 +563,12 @@ const cards = [
     ],
     "effects": [
       "MCprod",
-      "MCprod",
-      "Powerprod",
+      "negMCprod",
+      "negPowerprod",
       "City"
     ],
-    "image": "images/cards/Immigrant City.webp"
+    "image": "images/cards/Immigrant City.webp",
+    "requirement": "None"
   },
   {
     "name": "Titanium Mine",
@@ -564,7 +580,8 @@ const cards = [
     "effects": [
       "Titaniumprod"
     ],
-    "image": "images/cards/Titanium Mine.webp"
+    "image": "images/cards/Titanium Mine.webp",
+    "requirement": "None"
   },
   {
     "name": "Soil Factory",
@@ -574,20 +591,25 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Powerprod",
-      "Plantprod"
+      "negPowerprod",
+      "Plantprod",
+      "VP"
     ],
-    "image": "images/cards/Soil Factory.webp"
+    "image": "images/cards/Soil Factory.webp",
+    "requirement": "None"
   },
   {
     "name": "Subterranean Reservoir",
     "cost": 11,
     "color": "Red",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
       "Ocean"
     ],
-    "image": "images/cards/Subterranean Reservoir.webp"
+    "image": "images/cards/Subterranean Reservoir.webp",
+    "requirement": "None"
   },
   {
     "name": "Sponsors",
@@ -597,18 +619,24 @@ const cards = [
       "Earth"
     ],
     "effects": [
-      "MCprod",
       "MCprod"
     ],
-    "image": "images/cards/Sponsors.webp"
+    "image": "images/cards/Sponsors.webp",
+    "requirement": "None"
   },
   {
     "name": "Rover Construction",
     "cost": 8,
     "color": "Blue",
-    "tags": ["Building"],
-    "effects": [],
-    "image": "images/cards/Rover Construction.webp"
+    "tags": [
+      "None"
+    ],
+    "effects": [
+      "MC",
+      "VP"
+    ],
+    "image": "images/cards/Rover Construction.webp",
+    "requirement": "None"
   },
   {
     "name": "Fueled Generators",
@@ -619,10 +647,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "MCprod",
-      "Powerprod"
+      "Powerprod",
+      "negMCprod"
     ],
-    "image": "images/cards/Fueled Generators.webp"
+    "image": "images/cards/Fueled Generators.webp",
+    "requirement": "None"
   },
   {
     "name": "Herbivores",
@@ -633,21 +662,26 @@ const cards = [
     ],
     "effects": [
       "Animal",
-      "Plantprod"
+      "negPlantprod",
+      "VP"
     ],
-    "image": "images/cards/Herbivores.webp"
+    "image": "images/cards/Herbivores.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "CEO's Favorite Project",
     "cost": 1,
     "color": "Red",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
       "Microbe",
       "Animal",
       "Other"
     ],
-    "image": "images/cards/CEO's Favorite Project.webp"
+    "image": "images/cards/CEO's Favorite Project.webp",
+    "requirement": "None"
   },
   {
     "name": "Giant Space Mirror",
@@ -658,11 +692,10 @@ const cards = [
       "Space"
     ],
     "effects": [
-      "Powerprod",
-      "Powerprod",
       "Powerprod"
     ],
-    "image": "images/cards/Giant Space Mirror.webp"
+    "image": "images/cards/Giant Space Mirror.webp",
+    "requirement": "None"
   },
   {
     "name": "Import of Advanced GHG",
@@ -673,10 +706,10 @@ const cards = [
       "Earth"
     ],
     "effects": [
-      "Heatprod",
       "Heatprod"
     ],
-    "image": "images/cards/Import of Advanced GHG.webp"
+    "image": "images/cards/Import of Advanced GHG.webp",
+    "requirement": "None"
   },
   {
     "name": "Virus",
@@ -686,15 +719,11 @@ const cards = [
       "Microbe"
     ],
     "effects": [
-      "Animal",
-      "Animal",
-      "Plant",
-      "Plant",
-      "Plant",
-      "Plant",
-      "Plant"
+      "negPlant",
+      "Animal"
     ],
-    "image": "images/cards/Virus.webp"
+    "image": "images/cards/Virus.webp",
+    "requirement": "None"
   },
   {
     "name": "Imported Nitrogen",
@@ -707,16 +736,11 @@ const cards = [
     "effects": [
       "TR",
       "Plant",
-      "Plant",
-      "Plant",
-      "Plant",
       "Microbe",
-      "Microbe",
-      "Microbe",
-      "Animal",
       "Animal"
     ],
-    "image": "images/cards/Imported Nitrogen.webp"
+    "image": "images/cards/Imported Nitrogen.webp",
+    "requirement": "None"
   },
   {
     "name": "Business Contacts",
@@ -726,9 +750,11 @@ const cards = [
       "Earth"
     ],
     "effects": [
+      "Card",
       "Other"
     ],
-    "image": "images/cards/Business Contacts.webp"
+    "image": "images/cards/Business Contacts.webp",
+    "requirement": "None"
   },
   {
     "name": "Mass Converter",
@@ -740,23 +766,23 @@ const cards = [
     ],
     "effects": [
       "Powerprod",
-      "Powerprod",
-      "Powerprod",
-      "Powerprod",
-      "Powerprod",
-      "Powerprod"
+      "Reduction"
     ],
-    "image": "images/cards/Mass Converter.webp"
+    "image": "images/cards/Mass Converter.webp",
+    "requirement": "Tags"
   },
   {
     "name": "Land Claim",
     "cost": 1,
     "color": "Red",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
       "Other"
     ],
-    "image": "images/cards/Land Claim.webp"
+    "image": "images/cards/Land Claim.webp",
+    "requirement": "None"
   },
   {
     "name": "Convoy from Europa",
@@ -769,7 +795,8 @@ const cards = [
       "Ocean",
       "Card"
     ],
-    "image": "images/cards/Convoy from Europa.webp"
+    "image": "images/cards/Convoy from Europa.webp",
+    "requirement": "None"
   },
   {
     "name": "Big Asteroid",
@@ -779,18 +806,12 @@ const cards = [
       "Space"
     ],
     "effects": [
-      "Temperature",
-      "Temperature",
       "Titanium",
-      "Titanium",
-      "Titanium",
-      "Titanium",
-      "Plant",
-      "Plant",
-      "Plant",
-      "Plant"
+      "negPlant",
+      "Temperature"
     ],
-    "image": "images/cards/Big Asteroid.webp"
+    "image": "images/cards/Big Asteroid.webp",
+    "requirement": "None"
   },
   {
     "name": "Aquifer Pumping",
@@ -800,21 +821,12 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "Steel",
-      "Steel",
-      "Steel",
-      "Steel",
+      "negMC",
+      "negSteel",
       "Ocean"
     ],
-    "image": "images/cards/Aquifer Pumping.webp"
+    "image": "images/cards/Aquifer Pumping.webp",
+    "requirement": "None"
   },
   {
     "name": "Magnetic Field Dome",
@@ -824,12 +836,12 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Powerprod",
-      "Powerprod",
+      "negPowerprod",
       "Plantprod",
       "TR"
     ],
-    "image": "images/cards/Magnetic Field Dome.webp"
+    "image": "images/cards/Magnetic Field Dome.webp",
+    "requirement": "None"
   },
   {
     "name": "Gene Repair",
@@ -840,9 +852,10 @@ const cards = [
     ],
     "effects": [
       "MCprod",
-      "MCprod"
+      "VP"
     ],
-    "image": "images/cards/Gene Repair.webp"
+    "image": "images/cards/Gene Repair.webp",
+    "requirement": "Tags"
   },
   {
     "name": "Inventors' Guild",
@@ -852,32 +865,27 @@ const cards = [
       "Science"
     ],
     "effects": [
-      "Other"
+      "Other",
+      "Card",
+      "negMC"
     ],
-    "image": "images/cards/Inventors' Guild.webp"
+    "image": "images/cards/Inventors' Guild.webp",
+    "requirement": "None"
   },
   {
     "name": "Sabotage",
     "cost": 1,
     "color": "Red",
-    "tags": [],
-    "effects": [
-      "Titanium",
-      "Titanium",
-      "Titanium",
-      "Steel",
-      "Steel",
-      "Steel",
-      "Steel",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC"
+    "tags": [
+      "None"
     ],
-    "image": "images/cards/Sabotage.webp"
+    "effects": [
+      "negTitanium",
+      "negSteel",
+      "negMC"
+    ],
+    "image": "images/cards/Sabotage.webp",
+    "requirement": "None"
   },
   {
     "name": "Large Convoy",
@@ -890,18 +898,12 @@ const cards = [
     "effects": [
       "Ocean",
       "Card",
-      "Card",
-      "Plant",
-      "Plant",
-      "Plant",
-      "Plant",
-      "Plant",
       "Animal",
-      "Animal",
-      "Animal",
-      "Animal"
+      "Plant",
+      "VP"
     ],
-    "image": "images/cards/Large Convoy.webp"
+    "image": "images/cards/Large Convoy.webp",
+    "requirement": "None"
   },
   {
     "name": "Earth Office",
@@ -910,8 +912,11 @@ const cards = [
     "tags": [
       "Earth"
     ],
-    "effects": [],
-    "image": "images/cards/Earth Office.webp"
+    "effects": [
+      "Reduction"
+    ],
+    "image": "images/cards/Earth Office.webp",
+    "requirement": "None"
   },
   {
     "name": "Eos Chasma National Park",
@@ -924,12 +929,11 @@ const cards = [
     "effects": [
       "Animal",
       "Plant",
-      "Plant",
-      "Plant",
       "MCprod",
-      "MCprod"
+      "VP"
     ],
-    "image": "images/cards/Eos Chasma National Park.webp"
+    "image": "images/cards/Eos Chasma National Park.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Standard Technology",
@@ -938,8 +942,11 @@ const cards = [
     "tags": [
       "Science"
     ],
-    "effects": [],
-    "image": "images/cards/Standard Technology.webp"
+    "effects": [
+      "MC"
+    ],
+    "image": "images/cards/Standard Technology.webp",
+    "requirement": "None"
   },
   {
     "name": "Wave Power",
@@ -949,9 +956,11 @@ const cards = [
       "Energy"
     ],
     "effects": [
-      "Powerprod"
+      "Powerprod",
+      "VP"
     ],
-    "image": "images/cards/Wave Power.webp"
+    "image": "images/cards/Wave Power.webp",
+    "requirement": "Oceans"
   },
   {
     "name": "Development Center",
@@ -962,10 +971,11 @@ const cards = [
       "Science"
     ],
     "effects": [
-      "Power",
+      "negPower",
       "Card"
     ],
-    "image": "images/cards/Development Center.webp"
+    "image": "images/cards/Development Center.webp",
+    "requirement": "None"
   },
   {
     "name": "Earth Catapult",
@@ -974,8 +984,12 @@ const cards = [
     "tags": [
       "Earth"
     ],
-    "effects": [],
-    "image": "images/cards/Earth Catapult.webp"
+    "effects": [
+      "VP",
+      "Reduction"
+    ],
+    "image": "images/cards/Earth Catapult.webp",
+    "requirement": "None"
   },
   {
     "name": "Underground Detonations",
@@ -985,20 +999,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "Heatprod",
+      "negMC",
       "Heatprod"
     ],
-    "image": "images/cards/Underground Detonations.webp"
+    "image": "images/cards/Underground Detonations.webp",
+    "requirement": "None"
   },
   {
     "name": "Business Network",
@@ -1008,20 +1013,27 @@ const cards = [
       "Earth"
     ],
     "effects": [
-      "MCprod",
+      "negMCprod",
+      "Card",
+      "negMC",
       "Other"
     ],
-    "image": "images/cards/Business Network.webp"
+    "image": "images/cards/Business Network.webp",
+    "requirement": "None"
   },
   {
     "name": "Zeppelins",
     "cost": 13,
     "color": "Green",
-    "tags": [],
-    "effects": [
-      "anyMCprod"
+    "tags": [
+      "None"
     ],
-    "image": "images/cards/Zeppelins.webp"
+    "effects": [
+      "MCprod",
+      "VP"
+    ],
+    "image": "images/cards/Zeppelins.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "House Printing",
@@ -1031,9 +1043,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Steelprod"
+      "Steelprod",
+      "VP"
     ],
-    "image": "images/cards/House Printing.webp"
+    "image": "images/cards/House Printing.webp",
+    "requirement": "None"
   },
   {
     "name": "Methane from Titan",
@@ -1045,11 +1059,11 @@ const cards = [
     ],
     "effects": [
       "Heatprod",
-      "Heatprod",
       "Plantprod",
-      "Plantprod"
+      "VP"
     ],
-    "image": "images/cards/Methane from Titan.webp"
+    "image": "images/cards/Methane from Titan.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Advanced Ecosystems",
@@ -1060,22 +1074,26 @@ const cards = [
       "Microbe",
       "Animal"
     ],
-    "effects": [],
-    "image": "images/cards/Advanced Ecosystems.webp"
+    "effects": [
+      "VP"
+    ],
+    "image": "images/cards/Advanced Ecosystems.webp",
+    "requirement": "Tags"
   },
   {
     "name": "Hackers",
     "cost": 3,
     "color": "Green",
-    "tags": [],
-    "effects": [
-      "Powerprod",
-      "MCprod",
-      "MCprod",
-      "MCprod",
-      "MCprod"
+    "tags": [
+      "None"
     ],
-    "image": "images/cards/Hackers.webp"
+    "effects": [
+      "negPowerprod",
+      "MCprod",
+      "negMCprod"
+    ],
+    "image": "images/cards/Hackers.webp",
+    "requirement": "None"
   },
   {
     "name": "Greenhouses",
@@ -1086,9 +1104,10 @@ const cards = [
       "Plant"
     ],
     "effects": [
-      "anyPlant"
+      "Plant"
     ],
-    "image": "images/cards/Greenhouses.webp"
+    "image": "images/cards/Greenhouses.webp",
+    "requirement": "None"
   },
   {
     "name": "Plantation",
@@ -1100,7 +1119,8 @@ const cards = [
     "effects": [
       "Greenery"
     ],
-    "image": "images/cards/Plantation.webp"
+    "image": "images/cards/Plantation.webp",
+    "requirement": "Tags"
   },
   {
     "name": "Algae",
@@ -1110,11 +1130,11 @@ const cards = [
       "Plant"
     ],
     "effects": [
-      "Plant",
       "Plantprod",
-      "Plantprod"
+      "Plant"
     ],
-    "image": "images/cards/Algae.webp"
+    "image": "images/cards/Algae.webp",
+    "requirement": "Oceans"
   },
   {
     "name": "Optimal Aerobraking",
@@ -1123,8 +1143,12 @@ const cards = [
     "tags": [
       "Space"
     ],
-    "effects": [],
-    "image": "images/cards/Optimal Aerobraking.webp"
+    "effects": [
+      "MC",
+      "Heat"
+    ],
+    "image": "images/cards/Optimal Aerobraking.webp",
+    "requirement": "None"
   },
   {
     "name": "Ecological Zone",
@@ -1135,23 +1159,26 @@ const cards = [
       "Animal"
     ],
     "effects": [
-      "Special"
+      "Special",
+      "VP",
+      "Animal"
     ],
-    "image": "images/cards/Ecological Zone.webp"
+    "image": "images/cards/Ecological Zone.webp",
+    "requirement": "Other"
   },
   {
     "name": "Flooding",
     "cost": 7,
     "color": "Red",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
       "Ocean",
-      "MC",
-      "MC",
-      "MC",
-      "MC"
+      "negMC"
     ],
-    "image": "images/cards/Flooding.webp"
+    "image": "images/cards/Flooding.webp",
+    "requirement": "None"
   },
   {
     "name": "Immigration Shuttles",
@@ -1163,12 +1190,10 @@ const cards = [
     ],
     "effects": [
       "MCprod",
-      "MCprod",
-      "MCprod",
-      "MCprod",
-      "MCprod"
+      "VP"
     ],
-    "image": "images/cards/Immigration Shuttles.webp"
+    "image": "images/cards/Immigration Shuttles.webp",
+    "requirement": "None"
   },
   {
     "name": "Solar Wind Power",
@@ -1181,35 +1206,39 @@ const cards = [
     ],
     "effects": [
       "Powerprod",
-      "Titanium",
       "Titanium"
     ],
-    "image": "images/cards/Solar Wind Power.webp"
+    "image": "images/cards/Solar Wind Power.webp",
+    "requirement": "None"
   },
   {
     "name": "Lava Flows",
     "cost": 18,
     "color": "Red",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
-      "Temperature",
       "Temperature",
       "Special"
     ],
-    "image": "images/cards/Lava Flows.webp"
+    "image": "images/cards/Lava Flows.webp",
+    "requirement": "None"
   },
   {
     "name": "Cloud Seeding",
     "cost": 11,
     "color": "Green",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
-      "MCprod",
-      "Heatprod",
-      "Plantprod",
+      "negMCprod",
+      "negHeatprod",
       "Plantprod"
     ],
-    "image": "images/cards/Cloud Seeding.webp"
+    "image": "images/cards/Cloud Seeding.webp",
+    "requirement": "Oceans"
   },
   {
     "name": "Great Dam",
@@ -1221,9 +1250,10 @@ const cards = [
     ],
     "effects": [
       "Powerprod",
-      "Powerprod"
+      "VP"
     ],
-    "image": "images/cards/Great Dam.webp"
+    "image": "images/cards/Great Dam.webp",
+    "requirement": "Oceans"
   },
   {
     "name": "Psychrophiles",
@@ -1233,19 +1263,25 @@ const cards = [
       "Microbe"
     ],
     "effects": [
-      "Microbe"
+      "Microbe",
+      "Other"
     ],
-    "image": "images/cards/Psychrophiles.webp"
+    "image": "images/cards/Psychrophiles.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Rad-Suits",
     "cost": 6,
     "color": "Green",
-    "tags": [],
-    "effects": [
-      "MCprod"
+    "tags": [
+      "None"
     ],
-    "image": "images/cards/Rad-Suits.webp"
+    "effects": [
+      "MCprod",
+      "VP"
+    ],
+    "image": "images/cards/Rad-Suits.webp",
+    "requirement": "Other"
   },
   {
     "name": "Ironworks",
@@ -1255,14 +1291,12 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Power",
-      "Power",
-      "Power",
-      "Power",
+      "negPower",
       "Steel",
       "Oxygen"
     ],
-    "image": "images/cards/Ironworks.webp"
+    "image": "images/cards/Ironworks.webp",
+    "requirement": "None"
   },
   {
     "name": "IO Mining Industries",
@@ -1274,11 +1308,11 @@ const cards = [
     ],
     "effects": [
       "Titaniumprod",
-      "Titaniumprod",
       "MCprod",
-      "MCprod"
+      "VP"
     ],
-    "image": "images/cards/IO Mining Industries.webp"
+    "image": "images/cards/IO Mining Industries.webp",
+    "requirement": "None"
   },
   {
     "name": "Giant Ice Asteroid",
@@ -1289,17 +1323,11 @@ const cards = [
     ],
     "effects": [
       "Temperature",
-      "Temperature",
       "Ocean",
-      "Ocean",
-      "Plant",
-      "Plant",
-      "Plant",
-      "Plant",
-      "Plant",
-      "Plant"
+      "negPlant"
     ],
-    "image": "images/cards/Giant Ice Asteroid.webp"
+    "image": "images/cards/Giant Ice Asteroid.webp",
+    "requirement": "None"
   },
   {
     "name": "Arctic Algae",
@@ -1311,7 +1339,8 @@ const cards = [
     "effects": [
       "Plant"
     ],
-    "image": "images/cards/Arctic Algae.webp"
+    "image": "images/cards/Arctic Algae.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Food Factory",
@@ -1321,13 +1350,12 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Plantprod",
+      "negPlantprod",
       "MCprod",
-      "MCprod",
-      "MCprod",
-      "MCprod"
+      "VP"
     ],
-    "image": "images/cards/Food Factory.webp"
+    "image": "images/cards/Food Factory.webp",
+    "requirement": "None"
   },
   {
     "name": "Asteroid",
@@ -1339,12 +1367,10 @@ const cards = [
     "effects": [
       "Temperature",
       "Titanium",
-      "Titanium",
-      "Plant",
-      "Plant",
-      "Plant"
+      "negPlant"
     ],
-    "image": "images/cards/Asteroid.webp"
+    "image": "images/cards/Asteroid.webp",
+    "requirement": "None"
   },
   {
     "name": "Callisto Penal Mines",
@@ -1356,10 +1382,10 @@ const cards = [
     ],
     "effects": [
       "MCprod",
-      "MCprod",
-      "MCprod"
+      "VP"
     ],
-    "image": "images/cards/Callisto Penal Mines.webp"
+    "image": "images/cards/Callisto Penal Mines.webp",
+    "requirement": "None"
   },
   {
     "name": "Nuclear Power",
@@ -1370,13 +1396,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "MCprod",
-      "MCprod",
-      "Powerprod",
-      "Powerprod",
+      "negMCprod",
       "Powerprod"
     ],
-    "image": "images/cards/Nuclear Power.webp"
+    "image": "images/cards/Nuclear Power.webp",
+    "requirement": "None"
   },
   {
     "name": "Geothermal Power",
@@ -1387,10 +1411,10 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Powerprod",
       "Powerprod"
     ],
-    "image": "images/cards/Geothermal Power.webp"
+    "image": "images/cards/Geothermal Power.webp",
+    "requirement": "None"
   },
   {
     "name": "Adaptation Technology",
@@ -1399,8 +1423,12 @@ const cards = [
     "tags": [
       "Science"
     ],
-    "effects": [],
-    "image": "images/cards/Adaptation Technology.webp"
+    "effects": [
+      "Other",
+      "VP"
+    ],
+    "image": "images/cards/Adaptation Technology.webp",
+    "requirement": "None"
   },
   {
     "name": "Mohole Area",
@@ -1410,13 +1438,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Special",
       "Heatprod",
-      "Heatprod",
-      "Heatprod",
-      "Heatprod"
+      "Special"
     ],
-    "image": "images/cards/Mohole Area.webp"
+    "image": "images/cards/Mohole Area.webp",
+    "requirement": "None"
   },
   {
     "name": "Industrial Center",
@@ -1427,13 +1453,11 @@ const cards = [
     ],
     "effects": [
       "Special",
-      "Steelprod",
-      "MC",
-      "MC",
-      "MC",
-      "MC"
+      "negMC",
+      "Steelprod"
     ],
-    "image": "images/cards/Industrial Center.webp"
+    "image": "images/cards/Industrial Center.webp",
+    "requirement": "None"
   },
   {
     "name": "Decomposers",
@@ -1442,8 +1466,12 @@ const cards = [
     "tags": [
       "Microbe"
     ],
-    "effects": [],
-    "image": "images/cards/Decomposers.webp"
+    "effects": [
+      "VP",
+      "Microbe"
+    ],
+    "image": "images/cards/Decomposers.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "AI Central",
@@ -1454,11 +1482,12 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Powerprod",
-      "Card",
+      "negPowerprod",
+      "VP",
       "Card"
     ],
-    "image": "images/cards/AI Central.webp"
+    "image": "images/cards/AI Central.webp",
+    "requirement": "Tags"
   },
   {
     "name": "Underground City",
@@ -1469,13 +1498,12 @@ const cards = [
       "City"
     ],
     "effects": [
-      "Powerprod",
-      "Powerprod",
-      "Steelprod",
+      "negPowerprod",
       "Steelprod",
       "City"
     ],
-    "image": "images/cards/Underground City.webp"
+    "image": "images/cards/Underground City.webp",
+    "requirement": "None"
   },
   {
     "name": "Farming",
@@ -1486,13 +1514,12 @@ const cards = [
     ],
     "effects": [
       "MCprod",
-      "MCprod",
-      "Plantprod",
       "Plantprod",
       "Plant",
-      "Plant"
+      "VP"
     ],
-    "image": "images/cards/Farming.webp"
+    "image": "images/cards/Farming.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Nitrite Reducing Bacteria",
@@ -1503,11 +1530,10 @@ const cards = [
     ],
     "effects": [
       "Microbe",
-      "Microbe",
-      "Microbe",
       "TR"
     ],
-    "image": "images/cards/Nitrite Reducing Bacteria.webp"
+    "image": "images/cards/Nitrite Reducing Bacteria.webp",
+    "requirement": "None"
   },
   {
     "name": "Carbonate Processing",
@@ -1517,12 +1543,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Powerprod",
-      "Heatprod",
-      "Heatprod",
+      "negPowerprod",
       "Heatprod"
     ],
-    "image": "images/cards/Carbonate Processing.webp"
+    "image": "images/cards/Carbonate Processing.webp",
+    "requirement": "None"
   },
   {
     "name": "Investment Loan",
@@ -1532,19 +1557,11 @@ const cards = [
       "Earth"
     ],
     "effects": [
-      "MCprod",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
+      "negMCprod",
       "MC"
     ],
-    "image": "images/cards/Investment Loan.webp"
+    "image": "images/cards/Investment Loan.webp",
+    "requirement": "None"
   },
   {
     "name": "Noctis City",
@@ -1555,13 +1572,12 @@ const cards = [
       "City"
     ],
     "effects": [
-      "Powerprod",
-      "MCprod",
-      "MCprod",
+      "negPowerprod",
       "MCprod",
       "City"
     ],
-    "image": "images/cards/Noctis City.webp"
+    "image": "images/cards/Noctis City.webp",
+    "requirement": "None"
   },
   {
     "name": "SF Memorial",
@@ -1571,17 +1587,24 @@ const cards = [
       "Building"
     ],
     "effects": [
+      "VP",
       "Card"
     ],
-    "image": "images/cards/SF Memorial.webp"
+    "image": "images/cards/SF Memorial.webp",
+    "requirement": "None"
   },
   {
     "name": "Protected Habitats",
     "cost": 5,
     "color": "Blue",
-    "tags": [],
-    "effects": [],
-    "image": "images/cards/Protected Habitats.webp"
+    "tags": [
+      "None"
+    ],
+    "effects": [
+      "Other"
+    ],
+    "image": "images/cards/Protected Habitats.webp",
+    "requirement": "None"
   },
   {
     "name": "Vesta Shipyard",
@@ -1592,9 +1615,11 @@ const cards = [
       "Jovian"
     ],
     "effects": [
-      "Titaniumprod"
+      "Titaniumprod",
+      "VP"
     ],
-    "image": "images/cards/Vesta Shipyard.webp"
+    "image": "images/cards/Vesta Shipyard.webp",
+    "requirement": "None"
   },
   {
     "name": "Adapted Lichen",
@@ -1606,7 +1631,8 @@ const cards = [
     "effects": [
       "Plantprod"
     ],
-    "image": "images/cards/Adapted Lichen.webp"
+    "image": "images/cards/Adapted Lichen.webp",
+    "requirement": "None"
   },
   {
     "name": "Phobos Space Haven",
@@ -1618,9 +1644,11 @@ const cards = [
     ],
     "effects": [
       "Titaniumprod",
-      "City"
+      "City",
+      "VP"
     ],
-    "image": "images/cards/Phobos Space Haven.webp"
+    "image": "images/cards/Phobos Space Haven.webp",
+    "requirement": "None"
   },
   {
     "name": "Towing a Comet",
@@ -1631,11 +1659,11 @@ const cards = [
     ],
     "effects": [
       "Plant",
-      "Plant",
       "Oxygen",
       "Ocean"
     ],
-    "image": "images/cards/Towing a Comet.webp"
+    "image": "images/cards/Towing a Comet.webp",
+    "requirement": "None"
   },
   {
     "name": "Mine",
@@ -1647,7 +1675,8 @@ const cards = [
     "effects": [
       "Steelprod"
     ],
-    "image": "images/cards/Mine.webp"
+    "image": "images/cards/Mine.webp",
+    "requirement": "None"
   },
   {
     "name": "Electro Catapult",
@@ -1657,18 +1686,14 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Plant",
-      "Steel",
+      "negPlant",
+      "negSteel",
       "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "Powerprod"
+      "negPowerprod",
+      "VP"
     ],
-    "image": "images/cards/Electro Catapult.webp"
+    "image": "images/cards/Electro Catapult.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Lunar Beam",
@@ -1679,14 +1704,12 @@ const cards = [
       "Earth"
     ],
     "effects": [
-      "MCprod",
-      "MCprod",
+      "negMCprod",
       "Powerprod",
-      "Powerprod",
-      "Heatprod",
       "Heatprod"
     ],
-    "image": "images/cards/Lunar Beam.webp"
+    "image": "images/cards/Lunar Beam.webp",
+    "requirement": "None"
   },
   {
     "name": "Domed Crater",
@@ -1698,15 +1721,13 @@ const cards = [
     ],
     "effects": [
       "Plant",
-      "Plant",
-      "Plant",
       "City",
-      "Powerprod",
+      "negPowerprod",
       "MCprod",
-      "MCprod",
-      "MCprod"
+      "VP"
     ],
-    "image": "images/cards/Domed Crater.webp"
+    "image": "images/cards/Domed Crater.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Tropical Resort",
@@ -1716,13 +1737,12 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Heatprod",
-      "Heatprod",
+      "negHeatprod",
       "MCprod",
-      "MCprod",
-      "MCprod"
+      "VP"
     ],
-    "image": "images/cards/Tropical Resort.webp"
+    "image": "images/cards/Tropical Resort.webp",
+    "requirement": "None"
   },
   {
     "name": "Lichen",
@@ -1734,7 +1754,8 @@ const cards = [
     "effects": [
       "Plantprod"
     ],
-    "image": "images/cards/Lichen.webp"
+    "image": "images/cards/Lichen.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Magnetic Field Generators",
@@ -1744,17 +1765,12 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Powerprod",
-      "Powerprod",
-      "Powerprod",
-      "Powerprod",
+      "negPowerprod",
       "Plantprod",
-      "Plantprod",
-      "TR",
-      "TR",
       "TR"
     ],
-    "image": "images/cards/Magnetic Field Generators.webp"
+    "image": "images/cards/Magnetic Field Generators.webp",
+    "requirement": "None"
   },
   {
     "name": "Energy Saving",
@@ -1764,9 +1780,10 @@ const cards = [
       "Energy"
     ],
     "effects": [
-      "anyPowerprod"
+      "Powerprod"
     ],
-    "image": "images/cards/Energy Saving.webp"
+    "image": "images/cards/Energy Saving.webp",
+    "requirement": "None"
   },
   {
     "name": "Soletta",
@@ -1776,15 +1793,10 @@ const cards = [
       "Space"
     ],
     "effects": [
-      "Heatprod",
-      "Heatprod",
-      "Heatprod",
-      "Heatprod",
-      "Heatprod",
-      "Heatprod",
       "Heatprod"
     ],
-    "image": "images/cards/Soletta.webp"
+    "image": "images/cards/Soletta.webp",
+    "requirement": "None"
   },
   {
     "name": "Deimos Down",
@@ -1794,23 +1806,12 @@ const cards = [
       "Space"
     ],
     "effects": [
-      "Temperature",
-      "Temperature",
-      "Temperature",
       "Steel",
-      "Steel",
-      "Steel",
-      "Steel",
-      "Plant",
-      "Plant",
-      "Plant",
-      "Plant",
-      "Plant",
-      "Plant",
-      "Plant",
-      "Plant"
+      "negPlant",
+      "Temperature"
     ],
-    "image": "images/cards/Deimos Down.webp"
+    "image": "images/cards/Deimos Down.webp",
+    "requirement": "None"
   },
   {
     "name": "Water Splitting Plant",
@@ -1820,27 +1821,26 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Power",
-      "Power",
-      "Power",
+      "negPower",
       "Oxygen"
     ],
-    "image": "images/cards/Water Splitting Plant.webp"
+    "image": "images/cards/Water Splitting Plant.webp",
+    "requirement": "Oceans"
   },
   {
     "name": "Black Polar Dust",
     "cost": 15,
     "color": "Green",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
-      "MCprod",
-      "MCprod",
-      "Heatprod",
-      "Heatprod",
+      "negMCprod",
       "Heatprod",
       "Ocean"
     ],
-    "image": "images/cards/Black Polar Dust.webp"
+    "image": "images/cards/Black Polar Dust.webp",
+    "requirement": "None"
   },
   {
     "name": "Tectonic Stress Power",
@@ -1852,10 +1852,10 @@ const cards = [
     ],
     "effects": [
       "Powerprod",
-      "Powerprod",
-      "Powerprod"
+      "VP"
     ],
-    "image": "images/cards/Tectonic Stress Power.webp"
+    "image": "images/cards/Tectonic Stress Power.webp",
+    "requirement": "Tags"
   },
   {
     "name": "Beam from a Thorium Asteroid",
@@ -1867,14 +1867,12 @@ const cards = [
       "Jovian"
     ],
     "effects": [
-      "Powerprod",
-      "Powerprod",
-      "Powerprod",
       "Heatprod",
-      "Heatprod",
-      "Heatprod"
+      "Powerprod",
+      "VP"
     ],
-    "image": "images/cards/Beam from a Thorium Asteroid.webp"
+    "image": "images/cards/Beam from a Thorium Asteroid.webp",
+    "requirement": "Tags"
   },
   {
     "name": "Insects",
@@ -1884,9 +1882,10 @@ const cards = [
       "Microbe"
     ],
     "effects": [
-      "anyPlantprod"
+      "Plantprod"
     ],
-    "image": "images/cards/Insects.webp"
+    "image": "images/cards/Insects.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Technology Demonstration",
@@ -1897,24 +1896,23 @@ const cards = [
       "Science"
     ],
     "effects": [
-      "Card",
       "Card"
     ],
-    "image": "images/cards/Technology Demonstration.webp"
+    "image": "images/cards/Technology Demonstration.webp",
+    "requirement": "None"
   },
   {
     "name": "Mineral Deposit",
     "cost": 5,
     "color": "Red",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
-      "Steel",
-      "Steel",
-      "Steel",
-      "Steel",
       "Steel"
     ],
-    "image": "images/cards/Mineral Deposit.webp"
+    "image": "images/cards/Mineral Deposit.webp",
+    "requirement": "None"
   },
   {
     "name": "Robotic Workforce",
@@ -1924,22 +1922,10 @@ const cards = [
       "Science"
     ],
     "effects": [
-      "anyMCprod",
-      "Steelprod",
-      "Steelprod",
-      "Titaniumprod",
-      "Plantprod",
-      "Plantprod",
-      "Powerprod",
-      "Powerprod",
-      "Powerprod",
-      "Powerprod",
-      "Heatprod",
-      "Heatprod",
-      "Heatprod",
-      "Heatprod"
+      "Other"
     ],
-    "image": "images/cards/Robotic Workforce.webp"
+    "image": "images/cards/Robotic Workforce.webp",
+    "requirement": "None"
   },
   {
     "name": "Predators",
@@ -1950,9 +1936,10 @@ const cards = [
     ],
     "effects": [
       "Animal",
-      "Animal"
+      "VP"
     ],
-    "image": "images/cards/Predators.webp"
+    "image": "images/cards/Predators.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Quantum Extractor",
@@ -1964,11 +1951,10 @@ const cards = [
     ],
     "effects": [
       "Powerprod",
-      "Powerprod",
-      "Powerprod",
-      "Powerprod"
+      "Reduction"
     ],
-    "image": "images/cards/Quantum Extractor.webp"
+    "image": "images/cards/Quantum Extractor.webp",
+    "requirement": "Tags"
   },
   {
     "name": "Power Grid",
@@ -1978,9 +1964,10 @@ const cards = [
       "Energy"
     ],
     "effects": [
-      "anyPowerprod"
+      "Powerprod"
     ],
-    "image": "images/cards/Power Grid.webp"
+    "image": "images/cards/Power Grid.webp",
+    "requirement": "None"
   },
   {
     "name": "Lava Tube Settlement",
@@ -1991,31 +1978,28 @@ const cards = [
       "City"
     ],
     "effects": [
-      "Powerprod",
-      "MCprod",
+      "negPowerprod",
       "MCprod",
       "City"
     ],
-    "image": "images/cards/Lava Tube Settlement.webp"
+    "image": "images/cards/Lava Tube Settlement.webp",
+    "requirement": "None"
   },
   {
     "name": "Hired Raiders",
     "cost": 1,
     "color": "Red",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
       "Steel",
-      "Steel",
-      "Steel",
-      "Steel",
+      "negSteel",
       "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC"
+      "negMC"
     ],
-    "image": "images/cards/Hired Raiders.webp"
+    "image": "images/cards/Hired Raiders.webp",
+    "requirement": "None"
   },
   {
     "name": "Shuttles",
@@ -2025,11 +2009,13 @@ const cards = [
       "Space"
     ],
     "effects": [
-      "Powerprod",
+      "negPowerprod",
       "MCprod",
-      "MCprod"
+      "VP",
+      "Reduction"
     ],
-    "image": "images/cards/Shuttles.webp"
+    "image": "images/cards/Shuttles.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Colonizer Training Camp",
@@ -2039,8 +2025,11 @@ const cards = [
       "Building",
       "Jovian"
     ],
-    "effects": [],
-    "image": "images/cards/Colonizer Training Camp.webp"
+    "effects": [
+      "VP"
+    ],
+    "image": "images/cards/Colonizer Training Camp.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Advanced Alloys",
@@ -2049,8 +2038,11 @@ const cards = [
     "tags": [
       "Science"
     ],
-    "effects": [],
-    "image": "images/cards/Advanced Alloys.webp"
+    "effects": [
+      "Other"
+    ],
+    "image": "images/cards/Advanced Alloys.webp",
+    "requirement": "None"
   },
   {
     "name": "Artificial Lake",
@@ -2060,9 +2052,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Ocean"
+      "Ocean",
+      "VP"
     ],
-    "image": "images/cards/Artificial Lake.webp"
+    "image": "images/cards/Artificial Lake.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Terraforming Ganymede",
@@ -2073,9 +2067,11 @@ const cards = [
       "Jovian"
     ],
     "effects": [
-      "anyTR"
+      "TR",
+      "VP"
     ],
-    "image": "images/cards/Terraforming Ganymede.webp"
+    "image": "images/cards/Terraforming Ganymede.webp",
+    "requirement": "None"
   },
   {
     "name": "Regolith Eaters",
@@ -2087,10 +2083,10 @@ const cards = [
     ],
     "effects": [
       "Microbe",
-      "Microbe",
       "Oxygen"
     ],
-    "image": "images/cards/Regolith Eaters.webp"
+    "image": "images/cards/Regolith Eaters.webp",
+    "requirement": "None"
   },
   {
     "name": "Heat Trappers",
@@ -2101,11 +2097,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Heatprod",
-      "Heatprod",
+      "negHeatprod",
       "Powerprod"
     ],
-    "image": "images/cards/Heat Trappers.webp"
+    "image": "images/cards/Heat Trappers.webp",
+    "requirement": "None"
   },
   {
     "name": "Nuclear Zone",
@@ -2116,10 +2112,10 @@ const cards = [
     ],
     "effects": [
       "Special",
-      "Temperature",
       "Temperature"
     ],
-    "image": "images/cards/Nuclear Zone.webp"
+    "image": "images/cards/Nuclear Zone.webp",
+    "requirement": "None"
   },
   {
     "name": "Ganymede Colony",
@@ -2131,9 +2127,11 @@ const cards = [
       "City"
     ],
     "effects": [
-      "City"
+      "City",
+      "VP"
     ],
-    "image": "images/cards/Ganymede Colony.webp"
+    "image": "images/cards/Ganymede Colony.webp",
+    "requirement": "None"
   },
   {
     "name": "Solar Power",
@@ -2144,9 +2142,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Powerprod"
+      "Powerprod",
+      "VP"
     ],
-    "image": "images/cards/Solar Power.webp"
+    "image": "images/cards/Solar Power.webp",
+    "requirement": "None"
   },
   {
     "name": "Strip Mine",
@@ -2156,15 +2156,13 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Powerprod",
-      "Powerprod",
-      "Steelprod",
+      "negPowerprod",
       "Steelprod",
       "Titaniumprod",
-      "Oxygen",
       "Oxygen"
     ],
-    "image": "images/cards/Strip Mine.webp"
+    "image": "images/cards/Strip Mine.webp",
+    "requirement": "None"
   },
   {
     "name": "Asteroid Mining Consortium",
@@ -2174,10 +2172,12 @@ const cards = [
       "Jovian"
     ],
     "effects": [
+      "negTitaniumprod",
       "Titaniumprod",
-      "Titaniumprod"
+      "VP"
     ],
-    "image": "images/cards/Asteroid Mining Consortium.webp"
+    "image": "images/cards/Asteroid Mining Consortium.webp",
+    "requirement": "Other"
   },
   {
     "name": "GHG Producing Bacteria",
@@ -2189,10 +2189,10 @@ const cards = [
     ],
     "effects": [
       "Microbe",
-      "Microbe",
       "Temperature"
     ],
-    "image": "images/cards/GHG Producing Bacteria.webp"
+    "image": "images/cards/GHG Producing Bacteria.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Olympus Conference",
@@ -2203,8 +2203,13 @@ const cards = [
       "Building",
       "Earth"
     ],
-    "effects": [],
-    "image": "images/cards/Olympus Conference.webp"
+    "effects": [
+      "VP",
+      "Other",
+      "Card"
+    ],
+    "image": "images/cards/Olympus Conference.webp",
+    "requirement": "None"
   },
   {
     "name": "Livestock",
@@ -2214,12 +2219,13 @@ const cards = [
       "Animal"
     ],
     "effects": [
-      "Plantprod",
+      "Animal",
+      "negPlantprod",
       "MCprod",
-      "MCprod",
-      "Animal"
+      "VP"
     ],
-    "image": "images/cards/Livestock.webp"
+    "image": "images/cards/Livestock.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Anti-Gravity Technology",
@@ -2228,8 +2234,12 @@ const cards = [
     "tags": [
       "Science"
     ],
-    "effects": [],
-    "image": "images/cards/Anti-Gravity Technology.webp"
+    "effects": [
+      "Reduction",
+      "VP"
+    ],
+    "image": "images/cards/Anti-Gravity Technology.webp",
+    "requirement": "Tags"
   },
   {
     "name": "Worms",
@@ -2239,9 +2249,10 @@ const cards = [
       "Microbe"
     ],
     "effects": [
-      "anyPlantprod"
+      "Plantprod"
     ],
-    "image": "images/cards/Worms.webp"
+    "image": "images/cards/Worms.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Energy Tapping",
@@ -2252,9 +2263,10 @@ const cards = [
     ],
     "effects": [
       "Powerprod",
-      "Powerprod"
+      "negPowerprod"
     ],
-    "image": "images/cards/Energy Tapping.webp"
+    "image": "images/cards/Energy Tapping.webp",
+    "requirement": "None"
   },
   {
     "name": "Corporate Stronghold",
@@ -2265,13 +2277,12 @@ const cards = [
       "City"
     ],
     "effects": [
-      "Powerprod",
-      "MCprod",
-      "MCprod",
+      "negPowerprod",
       "MCprod",
       "City"
     ],
-    "image": "images/cards/Corporate Stronghold.webp"
+    "image": "images/cards/Corporate Stronghold.webp",
+    "requirement": "None"
   },
   {
     "name": "Nitrophilic Moss",
@@ -2281,12 +2292,11 @@ const cards = [
       "Plant"
     ],
     "effects": [
-      "Plant",
-      "Plant",
-      "Plantprod",
+      "negPlant",
       "Plantprod"
     ],
-    "image": "images/cards/Nitrophilic Moss.webp"
+    "image": "images/cards/Nitrophilic Moss.webp",
+    "requirement": "Oceans"
   },
   {
     "name": "Space Station",
@@ -2295,8 +2305,12 @@ const cards = [
     "tags": [
       "Space"
     ],
-    "effects": [],
-    "image": "images/cards/Space Station.webp"
+    "effects": [
+      "Reduction",
+      "VP"
+    ],
+    "image": "images/cards/Space Station.webp",
+    "requirement": "None"
   },
   {
     "name": "Industrial Microbes",
@@ -2307,10 +2321,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Powerprod",
-      "Steelprod"
+      "Steelprod",
+      "Powerprod"
     ],
-    "image": "images/cards/Industrial Microbes.webp"
+    "image": "images/cards/Industrial Microbes.webp",
+    "requirement": "None"
   },
   {
     "name": "Artificial Photosynthesis",
@@ -2321,10 +2336,10 @@ const cards = [
     ],
     "effects": [
       "Plantprod",
-      "Powerprod",
       "Powerprod"
     ],
-    "image": "images/cards/Artificial Photosynthesis.webp"
+    "image": "images/cards/Artificial Photosynthesis.webp",
+    "requirement": "None"
   },
   {
     "name": "Pets",
@@ -2335,9 +2350,12 @@ const cards = [
       "Animal"
     ],
     "effects": [
-      "Animal"
+      "Animal",
+      "Other",
+      "VP"
     ],
-    "image": "images/cards/Pets.webp"
+    "image": "images/cards/Pets.webp",
+    "requirement": "None"
   },
   {
     "name": "Protected Valley",
@@ -2349,10 +2367,10 @@ const cards = [
     ],
     "effects": [
       "MCprod",
-      "MCprod",
       "Greenery"
     ],
-    "image": "images/cards/Protected Valley.webp"
+    "image": "images/cards/Protected Valley.webp",
+    "requirement": "None"
   },
   {
     "name": "Power Infrastructure",
@@ -2363,10 +2381,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "anyMC",
-      "anyPower"
+      "MC",
+      "negPower"
     ],
-    "image": "images/cards/Power Infrastructure.webp"
+    "image": "images/cards/Power Infrastructure.webp",
+    "requirement": "None"
   },
   {
     "name": "Extreme-Cold Fungus",
@@ -2376,11 +2395,11 @@ const cards = [
       "Microbe"
     ],
     "effects": [
-      "Microbe",
-      "Microbe",
-      "Plant"
+      "Plant",
+      "Microbe"
     ],
-    "image": "images/cards/Extreme-Cold Fungus.webp"
+    "image": "images/cards/Extreme-Cold Fungus.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Open City",
@@ -2391,16 +2410,14 @@ const cards = [
       "City"
     ],
     "effects": [
+      "negPowerprod",
       "MCprod",
-      "MCprod",
-      "MCprod",
-      "MCprod",
-      "Powerprod",
       "Plant",
-      "Plant",
-      "City"
+      "City",
+      "VP"
     ],
-    "image": "images/cards/Open City.webp"
+    "image": "images/cards/Open City.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Breathing Filters",
@@ -2409,8 +2426,11 @@ const cards = [
     "tags": [
       "Science"
     ],
-    "effects": [],
-    "image": "images/cards/Breathing Filters.webp"
+    "effects": [
+      "VP"
+    ],
+    "image": "images/cards/Breathing Filters.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Research Coordination",
@@ -2419,8 +2439,11 @@ const cards = [
     "tags": [
       "Wild"
     ],
-    "effects": [],
-    "image": "images/cards/Research Coordination.webp"
+    "effects": [
+      "None"
+    ],
+    "image": "images/cards/Research Coordination.webp",
+    "requirement": "None"
   },
   {
     "name": "Biomass Combustors",
@@ -2431,11 +2454,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Plantprod",
-      "Powerprod",
+      "negPlantprod",
       "Powerprod"
     ],
-    "image": "images/cards/Biomass Combustors.webp"
+    "image": "images/cards/Biomass Combustors.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Mining Rights",
@@ -2445,11 +2468,12 @@ const cards = [
       "Building"
     ],
     "effects": [
+      "Special",
       "Steelprod",
-      "Titaniumprod",
-      "Special"
+      "Titaniumprod"
     ],
-    "image": "images/cards/Mining Rights.webp"
+    "image": "images/cards/Mining Rights.webp",
+    "requirement": "None"
   },
   {
     "name": "Satellites",
@@ -2459,9 +2483,10 @@ const cards = [
       "Space"
     ],
     "effects": [
-      "anyMCprod"
+      "MCprod"
     ],
-    "image": "images/cards/Satellites.webp"
+    "image": "images/cards/Satellites.webp",
+    "requirement": "None"
   },
   {
     "name": "Commercial District",
@@ -2471,14 +2496,13 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Powerprod",
+      "negPowerprod",
       "MCprod",
-      "MCprod",
-      "MCprod",
-      "MCprod",
-      "Special"
+      "Special",
+      "VP"
     ],
-    "image": "images/cards/Commercial District.webp"
+    "image": "images/cards/Commercial District.webp",
+    "requirement": "None"
   },
   {
     "name": "Fish",
@@ -2489,9 +2513,11 @@ const cards = [
     ],
     "effects": [
       "Animal",
-      "Plantprod"
+      "negPlantprod",
+      "VP"
     ],
-    "image": "images/cards/Fish.webp"
+    "image": "images/cards/Fish.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Asteroid Mining",
@@ -2503,9 +2529,10 @@ const cards = [
     ],
     "effects": [
       "Titaniumprod",
-      "Titaniumprod"
+      "VP"
     ],
-    "image": "images/cards/Asteroid Mining.webp"
+    "image": "images/cards/Asteroid Mining.webp",
+    "requirement": "None"
   },
   {
     "name": "Grass",
@@ -2516,21 +2543,23 @@ const cards = [
     ],
     "effects": [
       "Plant",
-      "Plant",
-      "Plant",
       "Plantprod"
     ],
-    "image": "images/cards/Grass.webp"
+    "image": "images/cards/Grass.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Micro-Mills",
     "cost": 3,
     "color": "Green",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
       "Heatprod"
     ],
-    "image": "images/cards/Micro-Mills.webp"
+    "image": "images/cards/Micro-Mills.webp",
+    "requirement": "None"
   },
   {
     "name": "Medical Lab",
@@ -2541,9 +2570,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "anyMCprod"
+      "MCprod",
+      "VP"
     ],
-    "image": "images/cards/Medical Lab.webp"
+    "image": "images/cards/Medical Lab.webp",
+    "requirement": "None"
   },
   {
     "name": "Media Group",
@@ -2552,8 +2583,11 @@ const cards = [
     "tags": [
       "Earth"
     ],
-    "effects": [],
-    "image": "images/cards/Media Group.webp"
+    "effects": [
+      "MC"
+    ],
+    "image": "images/cards/Media Group.webp",
+    "requirement": "None"
   },
   {
     "name": "Security Fleet",
@@ -2563,10 +2597,12 @@ const cards = [
       "Space"
     ],
     "effects": [
-      "Titanium",
-      "Other"
+      "negTitanium",
+      "Other",
+      "VP"
     ],
-    "image": "images/cards/Security Fleet.webp"
+    "image": "images/cards/Security Fleet.webp",
+    "requirement": "None"
   },
   {
     "name": "Toll Station",
@@ -2576,9 +2612,10 @@ const cards = [
       "Space"
     ],
     "effects": [
-      "anyMCprod"
+      "MCprod"
     ],
-    "image": "images/cards/Toll Station.webp"
+    "image": "images/cards/Toll Station.webp",
+    "requirement": "None"
   },
   {
     "name": "Bribed Committee",
@@ -2588,10 +2625,10 @@ const cards = [
       "Earth"
     ],
     "effects": [
-      "TR",
       "TR"
     ],
-    "image": "images/cards/Bribed Committee.webp"
+    "image": "images/cards/Bribed Committee.webp",
+    "requirement": "None"
   },
   {
     "name": "Invention Contest",
@@ -2601,20 +2638,25 @@ const cards = [
       "Science"
     ],
     "effects": [
+      "Card",
       "Other"
     ],
-    "image": "images/cards/Invention Contest.webp"
+    "image": "images/cards/Invention Contest.webp",
+    "requirement": "None"
   },
   {
     "name": "Great Escarpment Consortium",
     "cost": 6,
     "color": "Green",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
-      "Steelprod",
+      "negSteelprod",
       "Steelprod"
     ],
-    "image": "images/cards/Great Escarpment Consortium.webp"
+    "image": "images/cards/Great Escarpment Consortium.webp",
+    "requirement": "Other"
   },
   {
     "name": "Noctis Farming",
@@ -2627,9 +2669,10 @@ const cards = [
     "effects": [
       "MCprod",
       "Plant",
-      "Plant"
+      "VP"
     ],
-    "image": "images/cards/Noctis Farming.webp"
+    "image": "images/cards/Noctis Farming.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Power Plant",
@@ -2642,7 +2685,8 @@ const cards = [
     "effects": [
       "Powerprod"
     ],
-    "image": "images/cards/Power Plant.webp"
+    "image": "images/cards/Power Plant.webp",
+    "requirement": "None"
   },
   {
     "name": "Small Animals",
@@ -2653,9 +2697,11 @@ const cards = [
     ],
     "effects": [
       "Animal",
-      "Plantprod"
+      "negPlantprod",
+      "VP"
     ],
-    "image": "images/cards/Small Animals.webp"
+    "image": "images/cards/Small Animals.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Imported GHG",
@@ -2666,12 +2712,11 @@ const cards = [
       "Earth"
     ],
     "effects": [
-      "Heatprod",
-      "Heat",
-      "Heat",
+      "negHeat",
       "Heat"
     ],
-    "image": "images/cards/Imported GHG.webp"
+    "image": "images/cards/Imported GHG.webp",
+    "requirement": "None"
   },
   {
     "name": "Special Design",
@@ -2683,7 +2728,8 @@ const cards = [
     "effects": [
       "Other"
     ],
-    "image": "images/cards/Special Design.webp"
+    "image": "images/cards/Special Design.webp",
+    "requirement": "None"
   },
   {
     "name": "Capital",
@@ -2694,31 +2740,29 @@ const cards = [
       "City"
     ],
     "effects": [
-      "Powerprod",
-      "Powerprod",
-      "MCprod",
-      "MCprod",
-      "MCprod",
-      "MCprod",
+      "negPowerprod",
       "MCprod",
       "Special",
-      "City"
+      "City",
+      "VP"
     ],
-    "image": "images/cards/Capital.webp"
+    "image": "images/cards/Capital.webp",
+    "requirement": "Oceans"
   },
   {
     "name": "Mining Expedition",
     "cost": 12,
     "color": "Red",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
       "Oxygen",
-      "Plant",
-      "Plant",
-      "Steel",
+      "negPlant",
       "Steel"
     ],
-    "image": "images/cards/Mining Expedition.webp"
+    "image": "images/cards/Mining Expedition.webp",
+    "requirement": "None"
   },
   {
     "name": "Acquired Company",
@@ -2728,11 +2772,10 @@ const cards = [
       "Earth"
     ],
     "effects": [
-      "MCprod",
-      "MCprod",
       "MCprod"
     ],
-    "image": "images/cards/Acquired Company.webp"
+    "image": "images/cards/Acquired Company.webp",
+    "requirement": "None"
   },
   {
     "name": "Fuel Factory",
@@ -2742,11 +2785,12 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Powerprod",
-      "MCprod",
-      "Titaniumprod"
+      "negPowerprod",
+      "Titaniumprod",
+      "MCprod"
     ],
-    "image": "images/cards/Fuel Factory.webp"
+    "image": "images/cards/Fuel Factory.webp",
+    "requirement": "None"
   },
   {
     "name": "Search for Life",
@@ -2756,10 +2800,12 @@ const cards = [
       "Science"
     ],
     "effects": [
-      "MC",
-      "Other"
+      "negMC",
+      "Other",
+      "VP"
     ],
-    "image": "images/cards/Search for Life.webp"
+    "image": "images/cards/Search for Life.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Designed Microorganisms",
@@ -2770,10 +2816,10 @@ const cards = [
       "Microbe"
     ],
     "effects": [
-      "Plantprod",
       "Plantprod"
     ],
-    "image": "images/cards/Designed Microorganisms.webp"
+    "image": "images/cards/Designed Microorganisms.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Kelp Farming",
@@ -2784,14 +2830,12 @@ const cards = [
     ],
     "effects": [
       "MCprod",
-      "MCprod",
-      "Plantprod",
-      "Plantprod",
       "Plantprod",
       "Plant",
-      "Plant"
+      "VP"
     ],
-    "image": "images/cards/Kelp Farming.webp"
+    "image": "images/cards/Kelp Farming.webp",
+    "requirement": "Oceans"
   },
   {
     "name": "Water Import from Europa",
@@ -2802,25 +2846,13 @@ const cards = [
       "Jovian"
     ],
     "effects": [
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "MC",
-      "Titanium",
-      "Titanium",
-      "Titanium",
-      "Titanium",
-      "Ocean"
+      "VP",
+      "Ocean",
+      "negMC",
+      "negTitanium"
     ],
-    "image": "images/cards/Water Import from Europa.webp"
+    "image": "images/cards/Water Import from Europa.webp",
+    "requirement": "None"
   },
   {
     "name": "Mangrove",
@@ -2830,9 +2862,11 @@ const cards = [
       "Plant"
     ],
     "effects": [
-      "Greenery"
+      "Greenery",
+      "VP"
     ],
-    "image": "images/cards/Mangrove.webp"
+    "image": "images/cards/Mangrove.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Media Archives",
@@ -2842,30 +2876,36 @@ const cards = [
       "Earth"
     ],
     "effects": [
-      "anyMC"
+      "MC"
     ],
-    "image": "images/cards/Media Archives.webp"
+    "image": "images/cards/Media Archives.webp",
+    "requirement": "None"
   },
   {
     "name": "Ice Cap Melting",
     "cost": 5,
     "color": "Red",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
       "Ocean"
     ],
-    "image": "images/cards/Ice Cap Melting.webp"
+    "image": "images/cards/Ice Cap Melting.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Release of Inert Gases",
     "cost": 14,
     "color": "Red",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
-      "TR",
       "TR"
     ],
-    "image": "images/cards/Release of Inert Gases.webp"
+    "image": "images/cards/Release of Inert Gases.webp",
+    "requirement": "None"
   },
   {
     "name": "Restricted Area",
@@ -2875,12 +2915,12 @@ const cards = [
       "Science"
     ],
     "effects": [
-      "MC",
-      "MC",
+      "Special",
       "Card",
-      "Special"
+      "negMC"
     ],
-    "image": "images/cards/Restricted Area.webp"
+    "image": "images/cards/Restricted Area.webp",
+    "requirement": "None"
   },
   {
     "name": "Viral Enhancers",
@@ -2890,8 +2930,13 @@ const cards = [
       "Science",
       "Microbe"
     ],
-    "effects": [],
-    "image": "images/cards/Viral Enhancers.webp"
+    "effects": [
+      "Microbe",
+      "Animal",
+      "Plant"
+    ],
+    "image": "images/cards/Viral Enhancers.webp",
+    "requirement": "None"
   },
   {
     "name": "Trees",
@@ -2903,21 +2948,24 @@ const cards = [
     "effects": [
       "Plant",
       "Plantprod",
-      "Plantprod",
-      "Plantprod"
+      "VP"
     ],
-    "image": "images/cards/Trees.webp"
+    "image": "images/cards/Trees.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Lake Marineris",
     "cost": 18,
     "color": "Green",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
       "Ocean",
-      "Ocean"
+      "VP"
     ],
-    "image": "images/cards/Lake Marineris.webp"
+    "image": "images/cards/Lake Marineris.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Ice Asteroid",
@@ -2927,10 +2975,10 @@ const cards = [
       "Space"
     ],
     "effects": [
-      "Ocean",
       "Ocean"
     ],
-    "image": "images/cards/Ice Asteroid.webp"
+    "image": "images/cards/Ice Asteroid.webp",
+    "requirement": "None"
   },
   {
     "name": "Physics Complex",
@@ -2941,15 +2989,12 @@ const cards = [
       "Science"
     ],
     "effects": [
-      "Power",
-      "Power",
-      "Power",
-      "Power",
-      "Power",
-      "Power",
-      "Other"
+      "negPower",
+      "Other",
+      "VP"
     ],
-    "image": "images/cards/Physics Complex.webp"
+    "image": "images/cards/Physics Complex.webp",
+    "requirement": "None"
   },
   {
     "name": "Tardigrades",
@@ -2959,9 +3004,11 @@ const cards = [
       "Microbe"
     ],
     "effects": [
-      "Microbe"
+      "Microbe",
+      "VP"
     ],
-    "image": "images/cards/Tardigrades.webp"
+    "image": "images/cards/Tardigrades.webp",
+    "requirement": "None"
   },
   {
     "name": "Natural Preserve",
@@ -2973,9 +3020,11 @@ const cards = [
     ],
     "effects": [
       "Special",
-      "MCprod"
+      "MCprod",
+      "VP"
     ],
-    "image": "images/cards/Natural Preserve.webp"
+    "image": "images/cards/Natural Preserve.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Moss",
@@ -2985,10 +3034,11 @@ const cards = [
       "Plant"
     ],
     "effects": [
-      "Plant",
-      "Plantprod"
+      "Plantprod",
+      "negPlant"
     ],
-    "image": "images/cards/Moss.webp"
+    "image": "images/cards/Moss.webp",
+    "requirement": "Oceans"
   },
   {
     "name": "Martian Rails",
@@ -2998,10 +3048,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Power",
-      "anyMC"
+      "negPower",
+      "MC"
     ],
-    "image": "images/cards/Martian Rails.webp"
+    "image": "images/cards/Martian Rails.webp",
+    "requirement": "None"
   },
   {
     "name": "GHG Factories",
@@ -3011,13 +3062,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Powerprod",
-      "Heatprod",
-      "Heatprod",
-      "Heatprod",
+      "negPowerprod",
       "Heatprod"
     ],
-    "image": "images/cards/GHG Factories.webp"
+    "image": "images/cards/GHG Factories.webp",
+    "requirement": "None"
   },
   {
     "name": "Research",
@@ -3029,9 +3078,10 @@ const cards = [
     ],
     "effects": [
       "Card",
-      "Card"
+      "VP"
     ],
-    "image": "images/cards/Research.webp"
+    "image": "images/cards/Research.webp",
+    "requirement": "None"
   },
   {
     "name": "Birds",
@@ -3041,11 +3091,12 @@ const cards = [
       "Animal"
     ],
     "effects": [
+      "negPlantprod",
       "Animal",
-      "Plantprod",
-      "Plantprod"
+      "VP"
     ],
-    "image": "images/cards/Birds.webp"
+    "image": "images/cards/Birds.webp",
+    "requirement": "Oxygen"
   },
   {
     "name": "Tundra Farming",
@@ -3055,30 +3106,27 @@ const cards = [
       "Plant"
     ],
     "effects": [
-      "Plant",
       "Plantprod",
+      "Plant",
       "MCprod",
-      "MCprod"
+      "VP"
     ],
-    "image": "images/cards/Tundra Farming.webp"
+    "image": "images/cards/Tundra Farming.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Caretaker Contract",
     "cost": 3,
     "color": "Blue",
-    "tags": [],
+    "tags": [
+      "None"
+    ],
     "effects": [
-      "Heat",
-      "Heat",
-      "Heat",
-      "Heat",
-      "Heat",
-      "Heat",
-      "Heat",
-      "Heat",
+      "negHeat",
       "TR"
     ],
-    "image": "images/cards/Caretaker Contract.webp"
+    "image": "images/cards/Caretaker Contract.webp",
+    "requirement": "Temperature"
   },
   {
     "name": "Ore Processor",
@@ -3088,12 +3136,11 @@ const cards = [
       "Building"
     ],
     "effects": [
-      "Power",
-      "Power",
-      "Power",
+      "negPower",
       "Titanium",
       "Oxygen"
     ],
-    "image": "images/cards/Ore Processor.webp"
+    "image": "images/cards/Ore Processor.webp",
+    "requirement": "None"
   }
 ]
