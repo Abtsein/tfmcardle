@@ -144,13 +144,13 @@ main {
   position: absolute;
   top: 45%;
   transform: translateY(-50%);
-  right: calc(50% + 225px);
+  right: calc(50% + 215px);
   font-size: 20px;
   font-weight: bold;
 }
 
 .give-up-button {
-  left: calc(50% + 160px);
+  right: calc(50% + 160px);
 }
 
 .new-game-button {
@@ -171,7 +171,7 @@ main {
 }
 
 .random-card-button {
-  left: calc(50% + 200px);
+  left: calc(50% + 160px);
 }
 
 #cards-table {
