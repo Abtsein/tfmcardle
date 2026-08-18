@@ -126,19 +126,11 @@ main {
   background-color: #c1440e;
 }
 
-.card-preview-image {
-  width: 50px;
-  height: 70px;
-  flex-shrink: 0;
-
-  border-radius: 4px;
-  object-fit: cover;
-}
-
 .give-up-button,
-.new-game-button {
+.new-game-button,
+.random-card-button {
   position: absolute;
-  top: 50%;
+  top: 45%;
   transform: translateY(-50%);
 
   padding: 5px;
@@ -146,6 +138,15 @@ main {
   background: none;
 
   cursor: pointer;
+}
+
+.matches-count {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  right: calc(50% + 225px);
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .give-up-button {
@@ -157,49 +158,53 @@ main {
 }
 
 .give-up-button img,
-.new-game-button img {
+.new-game-button img,
+.random-card-button img {
   width: 35px;
   height: 35px;
 }
 
+.random-card-button:hover,
 .give-up-button:hover,
 .new-game-button:hover {
   transform: translateY(-50%) scale(1.1);
-}
-
-.random-card-button,
-.new-game-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-
-  padding: 5px;
-  border: none;
-  background: none;
-
-  cursor: pointer;
 }
 
 .random-card-button {
   left: calc(50% + 200px);
 }
 
-.random-card-button img,
-.new-game-button img {
-  width: 35px;
-  height: 35px;
-}
-
-.random-card-button:hover,
-.new-game-button:hover {
-  transform: translateY(-50%) scale(1.1);
-}
-
 #cards-table {
+  table-layout: fixed;
   width: 100%;
   max-width: 1000px;
-  margin: 30px auto;
+  margin: 20px auto;
   border-collapse: collapse;
+}
+
+#cards-table td:nth-child(1),
+#cards-table th:nth-child(1) {
+  width: 100px;
+}
+
+#cards-table td:nth-child(2),
+#cards-table th:nth-child(2) {
+  width: 100px;
+}
+
+#cards-table td:nth-child(3),
+#cards-table th:nth-child(3) {
+  width: 100px;
+}
+
+#cards-table td:nth-child(4),
+#cards-table th:nth-child(4) {
+  width: 150px;
+}
+
+#cards-table td:nth-child(5),
+#cards-table th:nth-child(5) {
+  width: 250px;
 }
 
 th,
@@ -226,15 +231,15 @@ th {
 }
 
 .correct-info {
-  background-color: #72de75;
+  background-color: #52f958;
 }
 
 .incorrect-info {
-  background-color: #de645b;
+  background-color: #eb7171;
 }
 
 .partial-info {
-  background-color: #eca946;
+  background-color: #f9a552;
 }
 
 td span {
@@ -264,11 +269,30 @@ td span {
   vertical-align: middle;
 }
 
-.tag-image,
-.effect-image,
-.requirement-image {
+.effect-image {
   width: 32px;
   height: 32px;
+  margin: 2px;
+  object-fit: contain;
+}
+
+.tag-image {
+  width: 48px;
+  height: 48px;
+  margin: 2px;
+  object-fit: contain;
+}
+
+.requirement-image {
+  width: 72px;
+  height: 72px;
+  margin: 2px;
+  object-fit: contain;
+}
+
+.color-image {
+  width: 64px;
+  height: 64px;
   margin: 2px;
   object-fit: contain;
 }
@@ -354,10 +378,6 @@ td span {
   cursor: pointer;
 }
 
-.modal-content button:not(.close-button) {
-  margin: 8px;
-}
-
 .info-footer {
   margin-top: 15px;
   font-size: 0.8rem;
@@ -408,6 +428,75 @@ td span {
   object-fit: contain;
 }
 
+.card-cost,
+.card-color {
+  font-family: "Rajdhani", sans-serif;
+  color: black;
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+#menu-title {
+  font-size: 48px;
+}
+
+#dropdown-toggle-mode
+#dropdown-toggle-matches {
+  width: 100%;
+  padding: 6px 12px;
+  margin: 0;
+  text-align: left;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ccc;
+  z-index: 10;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dropdown-menu button {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.dropdown-menu.hidden {
+  display: none;
+}
+
+.dropdown-menu button:hover {
+  background: #f0f0f0;
+}
+
+.modal-content label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  font-size: 24px;
+}
+
+#searchInput {
+  padding-left: 40px; /* Espace pour le compteur */
+}
+
 @media (max-width: 800px) {
   .game-header {
     grid-template-columns: 50px 1fr 50px;
@@ -430,12 +519,4 @@ td span {
   td {
     padding: 8px;
   }
-}
-
-.card-cost,
-.card-color {
-  font-family: "Rajdhani", sans-serif;
-  color: black;
-  font-weight: 700;
-  font-size: 25px;
 }

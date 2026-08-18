@@ -3,11 +3,15 @@ let attempts = 0;
 let gameMode = localStorage.getItem("gameMode") || "infinite";
 let gameResult = [];
 let selectedIndex = -1;
+let guessedCards = [];
+let matchesRemaining = [...cards];
+let showMatches = true;
 
 const debugSolution = document.getElementById("debug-solution");
 const searchInput = document.getElementById("search-input");
 const results = document.getElementById("results");
 const history = document.getElementById("history");
+const matchesCount = document.getElementById("matchesCount");
 const MAX_ATTEMPTS = 5;
 const FORCED_SOLUTION_NAME = null;
 
@@ -30,19 +34,30 @@ const menuButton = document.getElementById("menu-button");
 const menuModal = document.getElementById("menu-modal");
 const closeMenu = document.getElementById("close-menu");
 
-const dailyModeButton = document.getElementById("daily-mode");
-const infiniteModeButton = document.getElementById("infinite-mode");
-const currentModeText = document.getElementById("current-mode");
+const dropdownToggleMode = document.getElementById("dropdown-toggle-mode");
+const dropdownListMode = document.getElementById("dropdown-list");
+const dropdownSelectedMode = document.getElementById("dropdown-selected");
+
+const dropdownToggleMatches = document.getElementById('dropdown-toggle-matches');
+const dropdownListMatches = document.getElementById('dropdown-list-matches');
+const dropdownSelectedMatches = document.getElementById('dropdown-selected-matches');
+const showMatchesButtons = document.querySelectorAll('[data-show-matches]');
 
 const giveUpButton = document.getElementById("give-up-button");
 const newGameButton = document.getElementById("new-game-button");
 const randomCardButton = document.getElementById("random-card-button");
 
+const colorImages = {
+    Green: "images/colors/green.png",
+    Blue: "images/colors/blue.png",
+    Red: "images/colors/red.png",
+}
+
 const tagImages = {
   Building: "images/tags/building.png",
   Space: "images/tags/space.png",
   Science: "images/tags/science.png",
-  Energy: "images/tags/power.png",
+  Power: "images/tags/power.png",
   Earth: "images/tags/earth.png",
   Jovian: "images/tags/jovian.png",
   City: "images/tags/city.png",
@@ -58,28 +73,28 @@ const effectImages = {
   Steel: "images/effects/steel.png",
   Titanium: "images/effects/titanium.png",
   Plant: "images/effects/plant.png",
-  Power: "images/effects/power.png",
+  Energy: "images/effects/energy.png",
   Heat: "images/effects/heat.png",
 
   MCprod: "images/effects/mc_prod.png",
   Steelprod: "images/effects/steel_prod.png",
   Titaniumprod: "images/effects/titanium_prod.png",
   Plantprod: "images/effects/plant_prod.png",
-  Powerprod: "images/effects/power_prod.png",
+  Energyprod: "images/effects/energy_prod.png",
   Heatprod: "images/effects/heat_prod.png",
 
   negMC: "images/effects/mc_neg.png",
   negSteel: "images/effects/steel_neg.png",
   negTitanium: "images/effects/titanium_neg.png",
   negPlant: "images/effects/plant_neg.png",
-  negPower: "images/effects/power_neg.png",
+  negEnergy: "images/effects/energy_neg.png",
   negHeat: "images/effects/heat_neg.png",
 
   negMCprod: "images/effects/mc_neg_prod.png",
   negSteelprod: "images/effects/steel_neg_prod.png",
   negTitaniumprod: "images/effects/titanium_neg_prod.png",
   negPlantprod: "images/effects/plant_neg_prod.png",
-  negPowerprod: "images/effects/power_neg_prod.png",
+  negEnergyprod: "images/effects/energy_neg_prod.png",
   negHeatprod: "images/effects/heat_neg_prod.png",
 
   Special: "images/effects/special.png",
@@ -111,7 +126,6 @@ const requirementImages = {
 function initializeGame() {
   setupEventListeners();
   startGame();
-  updateModeText();
 }
 
 function setupEventListeners() {
@@ -119,12 +133,28 @@ function setupEventListeners() {
   closeMenu.addEventListener("click", closeMenuModal);
   menuModal.addEventListener("click", handleMenuOutsideClick);
 
-  dailyModeButton.addEventListener("click", () => {
-    changeGameMode("daily");
+  dropdownToggleMode.addEventListener("click", () => {
+    dropdownListMode.classList.toggle("hidden");
   });
 
-  infiniteModeButton.addEventListener("click", () => {
-    changeGameMode("infinite");
+  dropdownListMode.querySelectorAll("button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      changeGameMode(btn.dataset.mode);
+      dropdownListMode.classList.add("hidden");
+    });
+  });
+  
+  dropdownToggleMatches.addEventListener('click', () => {
+    dropdownListMatches.classList.toggle('hidden');
+  });
+
+  showMatchesButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      showMatches = button.dataset.showMatches === 'true';
+      updateShowMatchesText();
+      dropdownListMatches.classList.add('hidden');
+      document.getElementById("matchesCount").style.display = showMatches ? "block" : "none";
+    });
   });
 
   infoButton.addEventListener("click", openInfoModal);
@@ -139,7 +169,9 @@ function setupEventListeners() {
 
   giveUpButton.addEventListener("click", showDefeatModal);
   closeDefeatButton.addEventListener("click", closeDefeatModal);
+
   defeatModal.addEventListener("click", handleDefeatOutsideClick);
+  victoryModal.addEventListener("click", handleVictoryOutsideClick);
 
   newGameButton.addEventListener("click", startNewGame);
 
@@ -148,7 +180,7 @@ function setupEventListeners() {
 
 function openMenu() {
   menuModal.classList.remove("hidden");
-  updateModeText();
+  updateDropdownText();
 }
 
 function closeMenuModal() {
@@ -159,19 +191,28 @@ function handleMenuOutsideClick(event) {
   if (event.target === menuModal) {
     closeMenuModal();
   }
+  if (!event.target.closest(".dropdown")) {
+    dropdownListMode.classList.add("hidden");
+  }
 }
 
 function changeGameMode(mode) {
-  gameMode = mode;
-  localStorage.setItem("gameMode", gameMode);
-  updateModeText();
-  startGame();
-  closeMenuModal();
+  if (gameMode !== mode){
+    gameMode = mode;
+    localStorage.setItem("gameMode", gameMode);
+    updateDropdownText();
+    startGame();
+  }
 }
 
-function updateModeText() {
+function updateDropdownText() {
   const modeName = gameMode === "daily" ? "Daily" : "Infinite";
-  currentModeText.textContent = `Current mode: ${modeName}`;
+  dropdownSelectedMode.textContent = modeName;
+}
+
+function updateShowMatchesText() {
+  const text = showMatches ? "Yes" : "No";
+  dropdownSelectedMatches.textContent = text;
 }
 
 function openInfoModal() {
@@ -288,6 +329,7 @@ function selectCard(card) {
 
   if (card.name === solutionCard.name) {
     searchInput.disabled = true;
+    document.getElementById("matchesCount").style.display = "none";
     showVictoryModal();
     return;
   }
@@ -295,12 +337,19 @@ function selectCard(card) {
   if (attempts >= MAX_ATTEMPTS) {
     showDefeatModal();
   }
+  else {
+    searchInput.placeholder = `Guess a card (${attempts + 1}/${MAX_ATTEMPTS})`;
+  }
 }
 
 function startGame() {
   newGameButton.classList.add("hidden");
 
   solutionCard = getSolutionCard();
+  guessedCards = [];
+  matchesRemaining = [...cards];
+  matchesCount.textContent = `Matches remaining: ${matchesRemaining.length}`;
+  document.getElementById("matchesCount").style.display = showMatches ? "block" : "none";
   attempts = 0;
 
   gameResult = [];
@@ -308,9 +357,10 @@ function startGame() {
   results.innerHTML = "";
   searchInput.value = "";
   searchInput.disabled = false;
+  searchInput.placeholder = "Guess a card (1/5)";
 
-  hideVictoryModal();
-  hideDefeatModal();
+  closeVictoryModal();
+  closeDefeatModal();
   showGiveUpButton();
   showRandomButton();
 
@@ -334,7 +384,11 @@ function getSolutionCard() {
 }
 
 function getRandomCard() {
-  return cards[Math.floor(Math.random() * cards.length)];
+  const availableCards = cards.filter(
+    (card) => !guessedCards.some((guessed) => guessed.name === card.name)
+  );
+
+  return availableCards[Math.floor(Math.random() * availableCards.length)];
 }
 
 function getDailyCard() {
@@ -349,6 +403,8 @@ function getDailyCard() {
 }
 
 function addGuess(card) {
+  guessedCards.push(card);
+
   const row = document.createElement("tr");
 
   row.appendChild(createNameCell(card));
@@ -359,6 +415,8 @@ function addGuess(card) {
   row.appendChild(createEffectsCell(card));
 
   history.appendChild(row);
+
+  matchesCount.textContent = `Matches remaining: ${matchesRemaining.length}`;
 }
 
 function createNameCell(card) {
@@ -381,6 +439,9 @@ function createCostCell(card) {
 
   if (card.cost === solutionCard.cost) {
     cell.classList.add("correct-info");
+    matchesRemaining = matchesRemaining.filter(item =>
+      card.cost === item.cost
+    );
     return cell;
   }
 
@@ -391,6 +452,12 @@ function createCostCell(card) {
 
   cell.appendChild(arrow);
 
+  matchesRemaining = matchesRemaining.filter(item =>
+    solutionCard.cost > card.cost
+    ? item.cost > card.cost
+    : item.cost < card.cost
+  )
+
   return cell;
 }
 
@@ -399,10 +466,18 @@ function createColorCell(card) {
   cell.textContent = card.color;
   cell.classList.add("card-color");
 
-  cell.classList.add(
-    card.color === solutionCard.color
-      ? "correct-info"
-      : "incorrect-info"
+    if (card.color === solutionCard.color) {
+    cell.classList.add("correct-info");
+    matchesRemaining = matchesRemaining.filter(item =>
+      item.color === card.color
+    );
+    return cell;
+  }
+
+  cell.classList.add("incorrect-info");
+  
+  matchesRemaining = matchesRemaining.filter(item =>
+    item.color !== card.color
   );
 
   return cell;
@@ -418,11 +493,12 @@ function createRequirementCell(card) {
   img.classList.add("requirement-image");
   cell.appendChild(img);
 
-  cell.classList.add(
-    card.requirement === solutionCard.requirement
-      ? "correct-info"
-      : "incorrect-info"
-  );
+  const isCorrect = card.requirement === solutionCard.requirement;
+  cell.classList.add(isCorrect ? "correct-info" : "incorrect-info");
+
+  matchesRemaining = matchesRemaining.filter(item => {
+    return (item.requirement === card.requirement) === isCorrect;
+  });
 
   return cell;
 }
@@ -435,6 +511,11 @@ function createTagsCell(card) {
 
   cell.classList.add(getComparisonClass(result));
 
+  matchesRemaining = matchesRemaining.filter(item => {
+    const itemResult = compareTags(item.tags, card.tags);
+    return itemResult.isFullyCorrect === result.isFullyCorrect;
+  });
+
   return cell;
 }
 
@@ -445,6 +526,11 @@ function createEffectsCell(card) {
   displayEffects(cell, card.effects, solutionCard.effects);
 
   cell.classList.add(getComparisonClass(result));
+
+  matchesRemaining = matchesRemaining.filter(item => {
+    const itemResult = compareEffects(item.effects, card.effects);
+    return itemResult.isFullyCorrect === result.isFullyCorrect;
+  });
 
   return cell;
 }
@@ -485,6 +571,10 @@ function displayTags(cell, tags, solutionTags) {
     container.appendChild(image);
     container.appendChild(symbol);
     cell.appendChild(container);
+
+    matchesRemaining = matchesRemaining.filter(item => 
+      item.tags.includes(tag) === isCorrect
+    );
   });
 }
 
@@ -533,6 +623,10 @@ function displayEffects(cell, effects, solutionEffects) {
     container.appendChild(image);
     container.appendChild(symbol);
     cell.appendChild(container);
+
+    matchesRemaining = matchesRemaining.filter(item => 
+      item.effects.includes(effect) === matched
+    );
   });
 }
 
@@ -674,11 +768,6 @@ function showVictoryModal() {
   updateNewGameButton();
 }
 
-function hideVictoryModal() {
-  victoryModal.classList.remove("show");
-  victoryModal.classList.add("hidden");
-}
-
 function shareResult() {
   let resultText;
 
@@ -723,18 +812,20 @@ function showDefeatModal() {
   hideRandomButton();
 }
 
-function hideDefeatModal() {
+function closeDefeatModal() {
   defeatModal.classList.remove("show");
   defeatModal.classList.add("hidden");
-}
-
-function closeDefeatModal() {
-  hideDefeatModal();
 }
 
 function handleDefeatOutsideClick(event) {
   if (event.target === defeatModal) {
     closeDefeatModal();
+  }
+}
+
+function handleVictoryOutsideClick(event) {
+  if (event.target === victoryModal) {
+    closeVictoryModal();
   }
 }
 

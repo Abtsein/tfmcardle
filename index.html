@@ -54,10 +54,11 @@
           <img src="images/symbols/restart.png" alt="New game">
         </button>
 
+        <span id="matchesCount" class="matches-count">Matches remaining : 215</span>
+
         <input
           id="search-input"
           type="text"
-          placeholder="Guess a card"
           autocomplete="off"
           autofocus
         >
@@ -261,17 +262,29 @@
         ×
       </button>
 
-      <h2 id="menu-title">Game mode</h2>
+      <h2 id="menu-title">Settings</h2>
 
-      <button id="daily-mode" type="button">
-        Daily
-      </button>
+      <label>Game mode</label>
+      <div class="dropdown">
+        <button id="dropdown-toggle-mode" type="button">
+         <span id="dropdown-selected">Infinite</span> ▾
+        </button>
+        <div id="dropdown-list" class="dropdown-menu hidden">
+          <button type="button" data-mode="infinite">Infinite</button>
+          <button type="button" data-mode="daily">Daily</button>
+        </div>
+      </div>
+      <label>Show number of remaining matches</label>
+      <div class="dropdown">
+        <button id="dropdown-toggle-matches" type="button">
+          <span id="dropdown-selected-matches">Yes</span> ▾
+        </button>
+        <div id="dropdown-list-matches" class="dropdown-menu hidden">
+          <button type="button" data-show-matches="true">Yes</button>
+          <button type="button" data-show-matches="false">No</button>
+        </div>
+      </div>
 
-      <button id="infinite-mode" type="button">
-        Infinite
-      </button>
-
-      <p id="current-mode"></p>
     </div>
   </div>
 
