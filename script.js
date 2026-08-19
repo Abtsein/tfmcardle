@@ -5,7 +5,7 @@ let gameResult = [];
 let selectedIndex = -1;
 let guessedCards = [];
 let matchesRemaining = [...cards];
-let showMatches = true;
+let showMatches = localStorage.getItem("showMatches") !== "false";
 
 const debugSolution = document.getElementById("debug-solution");
 const searchInput = document.getElementById("search-input");
@@ -151,6 +151,7 @@ function setupEventListeners() {
   showMatchesButtons.forEach(button => {
     button.addEventListener('click', () => {
       showMatches = button.dataset.showMatches === 'true';
+      localStorage.setItem("showMatches", showMatches);
       updateShowMatchesText();
       dropdownListMatches.classList.add('hidden');
       document.getElementById("matchesCount").style.display = showMatches ? "block" : "none";
@@ -181,6 +182,7 @@ function setupEventListeners() {
 function openMenu() {
   menuModal.classList.remove("hidden");
   updateDropdownText();
+  updateShowMatchesText();
 }
 
 function closeMenuModal() {
