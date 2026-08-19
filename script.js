@@ -13,7 +13,7 @@ const results = document.getElementById("results");
 const history = document.getElementById("history");
 const matchesCount = document.getElementById("matchesCount");
 const MAX_ATTEMPTS = 5;
-const FORCED_SOLUTION_NAME = "Fish";
+const FORCED_SOLUTION_NAME = null;
 
 const victoryModal = document.getElementById("victory-modal");
 const victoryMessage = document.getElementById("victory-message");
@@ -185,6 +185,7 @@ function openMenu() {
 
 function closeMenuModal() {
   menuModal.classList.add("hidden");
+  searchInput.focus();
 }
 
 function handleMenuOutsideClick(event) {
@@ -221,6 +222,7 @@ function openInfoModal() {
 
 function closeInfoModal() {
   infoModal.classList.add("hidden");
+  searchInput.focus();
 }
 
 function handleInfoOutsideClick(event) {
