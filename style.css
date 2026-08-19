@@ -184,7 +184,7 @@ main {
 
 #cards-table td:nth-child(1),
 #cards-table th:nth-child(1) {
-  width: 10%;
+  width: 100px;
 }
 
 #cards-table td:nth-child(2),
@@ -205,6 +205,11 @@ main {
 #cards-table td:nth-child(5),
 #cards-table th:nth-child(5) {
   width: 25%;
+}
+
+#cards-table td:nth-child(6),
+#cards-table th:nth-child(6) {
+  width: 30%;
 }
 
 th,
@@ -253,7 +258,7 @@ td span {
 
   width: 70px;
   height: 98px;
-  margin: 0 auto 6px;
+  margin: 6px auto 6px;
 
   border-radius: 4px;
   object-fit: cover;

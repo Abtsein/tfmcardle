@@ -392,12 +392,12 @@ function getRandomCard() {
 }
 
 function getDailyCard() {
-  const today = new Date();
-
+  const parisTime = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Paris' }));
+  
   const dateNumber =
-    today.getFullYear() * 10000 +
-    (today.getMonth() + 1) * 100 +
-    today.getDate();
+    parisTime.getFullYear() * 10000 +
+    (parisTime.getMonth() + 1) * 100 +
+    parisTime.getDate();
 
   return cards[dateNumber % cards.length];
 }
