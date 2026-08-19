@@ -732,6 +732,7 @@ function getGuessResult(card) {
   return [
     getCostResult(card),
     card.color === solutionCard.color ? "🟩" : "🟥",
+    card.requirement === solutionCard.requirement ? "🟩" : "🟥",
     getComparisonEmoji(tagResult),
     getComparisonEmoji(effectResult)
   ].join("");

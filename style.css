@@ -184,27 +184,27 @@ main {
 
 #cards-table td:nth-child(1),
 #cards-table th:nth-child(1) {
-  width: 100px;
+  min-width: 10%;
 }
 
 #cards-table td:nth-child(2),
 #cards-table th:nth-child(2) {
-  width: 100px;
+  min-width: 10%;
 }
 
 #cards-table td:nth-child(3),
 #cards-table th:nth-child(3) {
-  width: 100px;
+  min-width: 10%;
 }
 
 #cards-table td:nth-child(4),
 #cards-table th:nth-child(4) {
-  width: 150px;
+  min-width: 15%;
 }
 
 #cards-table td:nth-child(5),
 #cards-table th:nth-child(5) {
-  width: 250px;
+  min-width: 25%;
 }
 
 th,
