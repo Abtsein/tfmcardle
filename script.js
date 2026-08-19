@@ -13,7 +13,7 @@ const results = document.getElementById("results");
 const history = document.getElementById("history");
 const matchesCount = document.getElementById("matchesCount");
 const MAX_ATTEMPTS = 5;
-const FORCED_SOLUTION_NAME = null;
+const FORCED_SOLUTION_NAME = "Fish";
 
 const victoryModal = document.getElementById("victory-modal");
 const victoryMessage = document.getElementById("victory-message");
@@ -316,11 +316,11 @@ function updateSelectedSuggestion(suggestions) {
 
 function selectCard(card) {
   attempts++;
+  addGuess(card);
 
   const result = getGuessResult(card);
 
   gameResult.push(result);
-  addGuess(card);
 
   searchInput.value = "";
   searchInput.focus();
@@ -734,7 +734,8 @@ function getGuessResult(card) {
     card.color === solutionCard.color ? "🟩" : "🟥",
     card.requirement === solutionCard.requirement ? "🟩" : "🟥",
     getComparisonEmoji(tagResult),
-    getComparisonEmoji(effectResult)
+    getComparisonEmoji(effectResult),
+    " (",matchesRemaining.length," matches)"
   ].join("");
 }
 
@@ -755,8 +756,11 @@ function getComparisonEmoji(result) {
 }
 
 function showVictoryModal() {
-  victoryMessage.textContent =
-    `You found the card: ${solutionCard.name}`;
+  victoryMessage.textContent = "You found the card: ";
+  
+  const strongElement = document.createElement("strong");
+  strongElement.textContent = solutionCard.name;
+  victoryMessage.appendChild(strongElement);
 
   victoryCardImage.src = solutionCard.image;
   victoryCardImage.alt = solutionCard.name;
