@@ -94,6 +94,14 @@ main {
   font-size: 16px;
 }
 
+.matches-count,
+.cards-played {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
 #results {
   width: min(326px, 90%);
   margin: 0 auto;
@@ -138,15 +146,6 @@ main {
   background: none;
 
   cursor: pointer;
-}
-
-.matches-count {
-  position: absolute;
-  top: 45%;
-  transform: translateY(-50%);
-  right: calc(50% + 215px);
-  font-size: 20px;
-  font-weight: bold;
 }
 
 .give-up-button {
@@ -228,6 +227,10 @@ th {
   color: white;
 }
 
+.card-column.hidden {
+  display: none;
+}
+
 .correct-info,
 .incorrect-info,
 .partial-info {
@@ -281,6 +284,13 @@ td span {
   object-fit: contain;
 }
 
+.effect-image-mobile {
+  width: 20px;
+  height: 20px;
+  margin: 2px;
+  object-fit: contain;
+}
+
 .tag-image {
   width: 48px;
   height: 48px;
@@ -288,9 +298,23 @@ td span {
   object-fit: contain;
 }
 
+.tag-image-mobile {
+  width: 24px;
+  height: 24px;
+  margin: 2px;
+  object-fit: contain;
+}
+
 .requirement-image {
   width: 72px;
   height: 72px;
+  margin: 2px;
+  object-fit: contain;
+}
+
+.requirement-image-mobile {
+  width: 32px;
+  height: 32px;
   margin: 2px;
   object-fit: contain;
 }
@@ -444,7 +468,8 @@ td span {
 }
 
 #dropdown-toggle-mode
-#dropdown-toggle-matches {
+#dropdown-toggle-matches
+#dropdown-toggle-view {
   width: 100%;
   padding: 6px 12px;
   margin: 0;

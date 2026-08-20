@@ -54,8 +54,6 @@
           <img src="images/symbols/restart.png" alt="New game">
         </button>
 
-        <span id="matchesCount" class="matches-count">Matches remaining : 215</span>
-
         <input
           id="search-input"
           type="text"
@@ -82,17 +80,23 @@
         </button>
       </div>
 
+      <div id="matchesCount" class="matches-count">Matches remaining : 215</div>
+
+      <div id="cardsPlayed" class="cards-played">
+        <span id="cards-list"></span>
+      </div>
+
       <div id="results"></div>
 
       <table id="cards-table">
         <thead>
           <tr>
-            <th scope="col">Card</th>
-            <th scope="col">Cost</th>
-            <th scope="col">Color</th>
-            <th scope="col">Requirement</th>
-            <th scope="col">Tags</th>
-            <th scope="col">Effects</th>
+            <th id="card" scope="col" class="card-column hidden">Card</th>
+            <th id="cost" scope="col" class="card-column hidden">Cost</th>
+            <th id="color" scope="col" class="card-column hidden">Color</th>
+            <th id="requirement" scope="col" class="card-column hidden">Req.</th>
+            <th id="tags" scope="col" class="card-column hidden">Tags</th>
+            <th id="effects" scope="col" class="card-column hidden">Effects</th>
           </tr>
         </thead>
 
@@ -268,9 +272,9 @@
       <label>Game mode</label>
       <div class="dropdown">
         <button id="dropdown-toggle-mode" type="button">
-         <span id="dropdown-selected">Infinite</span> ▾
+          <span id="dropdown-selected-mode">Infinite</span> ▾
         </button>
-        <div id="dropdown-list" class="dropdown-menu hidden">
+        <div id="dropdown-list-mode" class="dropdown-menu hidden">
           <button type="button" data-mode="infinite">Infinite</button>
           <button type="button" data-mode="daily">Daily</button>
         </div>
@@ -283,6 +287,16 @@
         <div id="dropdown-list-matches" class="dropdown-menu hidden">
           <button type="button" data-show-matches="true">Yes</button>
           <button type="button" data-show-matches="false">No</button>
+        </div>
+      </div>
+      <label>View</label>
+      <div class="dropdown">
+        <button id="dropdown-toggle-view" type="button">
+          <span id="dropdown-selected-view">Normal</span> ▾
+        </button>
+        <div id="dropdown-list-view" class="dropdown-menu hidden">
+          <button type="button" data-view="normal">Normal</button>
+          <button type="button" data-view="mobile">Mobile</button>
         </div>
       </div>
 

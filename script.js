@@ -1,17 +1,19 @@
 let solutionCard;
 let attempts = 0;
 let gameMode = localStorage.getItem("gameMode") || "infinite";
+let viewMode = localStorage.getItem("viewMode") || "normal";
+let showMatches = localStorage.getItem("showMatches") !== "false";
 let gameResult = [];
 let selectedIndex = -1;
 let guessedCards = [];
 let matchesRemaining = [...cards];
-let showMatches = localStorage.getItem("showMatches") !== "false";
 
 const debugSolution = document.getElementById("debug-solution");
 const searchInput = document.getElementById("search-input");
 const results = document.getElementById("results");
 const history = document.getElementById("history");
 const matchesCount = document.getElementById("matchesCount");
+const cardsPlayed = document.getElementById("cards-list");
 const MAX_ATTEMPTS = 5;
 const FORCED_SOLUTION_NAME = null;
 
@@ -35,8 +37,12 @@ const menuModal = document.getElementById("menu-modal");
 const closeMenu = document.getElementById("close-menu");
 
 const dropdownToggleMode = document.getElementById("dropdown-toggle-mode");
-const dropdownListMode = document.getElementById("dropdown-list");
-const dropdownSelectedMode = document.getElementById("dropdown-selected");
+const dropdownListMode = document.getElementById("dropdown-list-mode");
+const dropdownSelectedMode = document.getElementById("dropdown-selected-mode");
+
+const dropdownToggleView = document.getElementById("dropdown-toggle-view");
+const dropdownListView = document.getElementById("dropdown-list-view");
+const dropdownSelectedView = document.getElementById("dropdown-selected-view");
 
 const dropdownToggleMatches = document.getElementById('dropdown-toggle-matches');
 const dropdownListMatches = document.getElementById('dropdown-list-matches');
@@ -46,12 +52,6 @@ const showMatchesButtons = document.querySelectorAll('[data-show-matches]');
 const giveUpButton = document.getElementById("give-up-button");
 const newGameButton = document.getElementById("new-game-button");
 const randomCardButton = document.getElementById("random-card-button");
-
-const colorImages = {
-    Green: "images/colors/green.png",
-    Blue: "images/colors/blue.png",
-    Red: "images/colors/red.png",
-}
 
 const tagImages = {
   Building: "images/tags/building.png",
@@ -143,17 +143,28 @@ function setupEventListeners() {
       dropdownListMode.classList.add("hidden");
     });
   });
+
+  dropdownToggleView.addEventListener("click", () => {
+    dropdownListView.classList.toggle("hidden");
+  });
+
+  dropdownListView.querySelectorAll("button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      changeView(btn.dataset.view);
+      dropdownListView.classList.add("hidden");
+    });
+  });
   
   dropdownToggleMatches.addEventListener('click', () => {
-    dropdownListMatches.classList.toggle('hidden');
+    dropdownListMatches.classList.toggle("hidden");
   });
 
   showMatchesButtons.forEach(button => {
     button.addEventListener('click', () => {
-      showMatches = button.dataset.showMatches === 'true';
+      showMatches = button.dataset.showMatches === "true";
       localStorage.setItem("showMatches", showMatches);
       updateShowMatchesText();
-      dropdownListMatches.classList.add('hidden');
+      dropdownListMatches.classList.add("hidden");
       document.getElementById("matchesCount").style.display = showMatches ? "block" : "none";
     });
   });
@@ -181,8 +192,9 @@ function setupEventListeners() {
 
 function openMenu() {
   menuModal.classList.remove("hidden");
-  updateDropdownText();
+  updateDropdownModeText();
   updateShowMatchesText();
+  updateDropdownViewText();
 }
 
 function closeMenuModal() {
@@ -196,6 +208,8 @@ function handleMenuOutsideClick(event) {
   }
   if (!event.target.closest(".dropdown")) {
     dropdownListMode.classList.add("hidden");
+    dropdownListMatches.classList.add("hidden");
+    dropdownListView.classList.add("hidden");
   }
 }
 
@@ -203,14 +217,43 @@ function changeGameMode(mode) {
   if (gameMode !== mode){
     gameMode = mode;
     localStorage.setItem("gameMode", gameMode);
-    updateDropdownText();
+    updateDropdownModeText();
     startGame();
   }
 }
 
-function updateDropdownText() {
+function changeView(view) {
+  if (viewMode !== view){
+    viewMode = view;
+    localStorage.setItem("viewMode", viewMode);
+    updateDropdownViewText();
+    
+    if (attempts !== 0) {
+      document.querySelectorAll(".card-column").forEach(el => {
+        if (viewMode === "mobile" && el.id === "card") {
+          el.classList.add("hidden");
+        } else {
+          el.classList.remove("hidden");
+        }
+      });
+      if (viewMode === "mobile") {
+        cardsPlayed.classList.remove("hidden");
+      } else {
+        cardsPlayed.classList.add("hidden");
+      }
+    }
+    updateTableView();
+  }
+}
+
+function updateDropdownModeText() {
   const modeName = gameMode === "daily" ? "Daily" : "Infinite";
   dropdownSelectedMode.textContent = modeName;
+}
+
+function updateDropdownViewText() {
+  const viewName = viewMode === "normal" ? "Normal" : "Mobile";
+  dropdownSelectedView.textContent = viewName;
 }
 
 function updateShowMatchesText() {
@@ -351,10 +394,15 @@ function startGame() {
 
   solutionCard = getSolutionCard();
   guessedCards = [];
+  cardsPlayed.textContent = "";
   matchesRemaining = [...cards];
   matchesCount.textContent = `Matches remaining: ${matchesRemaining.length}`;
   document.getElementById("matchesCount").style.display = showMatches ? "block" : "none";
   attempts = 0;
+
+  document.querySelectorAll(".card-column").forEach(el => {
+    el.classList.add("hidden");
+  });
 
   gameResult = [];
   history.innerHTML = "";
@@ -408,7 +456,27 @@ function getDailyCard() {
 
 function addGuess(card) {
   guessedCards.push(card);
+  if (attempts === 1) {
+    cardsPlayed.textContent += "Cards played: " + card.name;
+  } else {
+    cardsPlayed.textContent += ", " + card.name;
+  }
 
+  if (attempts === 1) {
+    document.querySelectorAll(".card-column").forEach(el => {
+        if (viewMode === "mobile" && el.id === "card") {
+          el.classList.add("hidden");
+        } else {
+          el.classList.remove("hidden");
+        }
+    });
+    if (viewMode === "mobile") {
+      cardsPlayed.classList.remove("hidden");
+    } else {
+      cardsPlayed.classList.add("hidden");
+    }
+
+  }
   const row = document.createElement("tr");
 
   row.appendChild(createNameCell(card));
@@ -425,10 +493,15 @@ function addGuess(card) {
 
 function createNameCell(card) {
   const cell = document.createElement("td");
+  cell.classList.add("card-column");
+  cell.id = "card";
+
+  if (viewMode === "mobile") {
+    cell.classList.add("hidden");
+  }
 
   const image = document.createElement("img");
   image.src = card.image;
-  image.alt = card.name;
   image.classList.add("history-card-image");
 
   cell.appendChild(image);
@@ -436,13 +509,45 @@ function createNameCell(card) {
   return cell;
 }
 
+function costCellText(arrow, cost) {
+  const fragment = document.createDocumentFragment();
+  
+  if (viewMode === "mobile") {
+    if (arrow === ">") {
+      const arrowSpan = document.createElement("span");
+      arrowSpan.textContent = "⬆️";
+      fragment.appendChild(arrowSpan);
+      fragment.appendChild(document.createElement("br"));
+      fragment.appendChild(document.createTextNode(cost));
+    } else if (arrow === "<") {
+      fragment.appendChild(document.createTextNode(cost));
+      fragment.appendChild(document.createElement("br"));
+      const arrowSpan = document.createElement("span");
+      arrowSpan.textContent = "⬇️";
+      fragment.appendChild(arrowSpan);
+    } else {
+      fragment.appendChild(document.createTextNode(cost));
+    }
+  } else {
+    fragment.appendChild(document.createTextNode(cost + " "));
+    if (arrow !== "") {
+      const arrowSpan = document.createElement("span");
+      arrowSpan.textContent = arrow === ">" ? "⬆️" : "⬇️";
+      fragment.appendChild(arrowSpan);
+    }
+  }
+  
+  return fragment;
+}
+
 function createCostCell(card) {
   const cell = document.createElement("td");
-  cell.textContent = card.cost;
   cell.classList.add("card-cost");
+  cell.id = "cost";
 
   if (card.cost === solutionCard.cost) {
     cell.classList.add("correct-info");
+    cell.appendChild(costCellText("", card.cost));
     matchesRemaining = matchesRemaining.filter(item =>
       card.cost === item.cost
     );
@@ -451,10 +556,8 @@ function createCostCell(card) {
 
   cell.classList.add("incorrect-info");
 
-  const arrow = document.createElement("span");
-  arrow.textContent = solutionCard.cost > card.cost ? "⬆️" : "⬇️";
-
-  cell.appendChild(arrow);
+  const arrow = solutionCard.cost > card.cost ? ">" : "<";
+  cell.appendChild(costCellText(arrow, card.cost));
 
   matchesRemaining = matchesRemaining.filter(item =>
     solutionCard.cost > card.cost
@@ -467,8 +570,10 @@ function createCostCell(card) {
 
 function createColorCell(card) {
   const cell = document.createElement("td");
-  cell.textContent = card.color;
   cell.classList.add("card-color");
+  cell.id = "color";
+
+  cell.textContent = viewMode === "mobile" ? card.color.charAt(0).toUpperCase() : card.color;
 
     if (card.color === solutionCard.color) {
     cell.classList.add("correct-info");
@@ -489,12 +594,13 @@ function createColorCell(card) {
 
 function createRequirementCell(card) {
   const cell = document.createElement("td");
+  cell.id = "requirement";
 
   const img = document.createElement("img");
   img.src = requirementImages[card.requirement] || requirementImages["None"];
   img.alt = card.requirement;
   img.title = card.requirement;
-  img.classList.add("requirement-image");
+  img.classList.add(viewMode === "mobile" ? "requirement-image-mobile" : "requirement-image");
   cell.appendChild(img);
 
   const isCorrect = card.requirement === solutionCard.requirement;
@@ -509,6 +615,7 @@ function createRequirementCell(card) {
 
 function createTagsCell(card) {
   const cell = document.createElement("td");
+  cell.id = "tags";
   const result = compareTags(card.tags, solutionCard.tags);
 
   displayTags(cell, card.tags, solutionCard.tags);
@@ -525,6 +632,7 @@ function createTagsCell(card) {
 
 function createEffectsCell(card) {
   const cell = document.createElement("td");
+  cell.id = "effects";
   const result = compareEffects(card.effects, solutionCard.effects);
 
   displayEffects(cell, card.effects, solutionCard.effects);
@@ -561,8 +669,7 @@ function displayTags(cell, tags, solutionTags) {
 
     const image = createIcon(
       tagImages[tag],
-      tag,
-      "tag-image"
+      tag, viewMode === "mobile" ? "tag-image-mobile" : "tag-image"
     );
 
     usedCounts[tag] = (usedCounts[tag] || 0) + 1;
@@ -618,8 +725,7 @@ function displayEffects(cell, effects, solutionEffects) {
 
     const image = createIcon(
       effectImages[effect],
-      effect,
-      "effect-image"
+      effect, viewMode === "mobile" ? "effect-image-mobile" : "effect-image"
     );
 
     const symbol = createSymbol(matched);
@@ -878,6 +984,43 @@ function handleRandomCardClick() {
 
   const randomCard = getRandomCard();
   selectCard(randomCard);
+}
+
+function updateTableView() {
+  const rows = history.querySelectorAll("tr");
+  
+  rows.forEach((row) => {
+    const costCell = row.cells[1];
+    const costText = costCell.textContent;
+    const cost = parseInt(costText.replace(/[⬆️⬇️]/g, ""));
+    const arrow = costText.includes("⬆️") ? ">" : costText.includes("⬇️") ? "<" : "";
+    costCell.innerHTML = "";
+    costCell.appendChild(costCellText(arrow, cost));
+
+    const colorCell = row.cells[2];
+    const colorMap = { "R": "Red", "B": "Blue", "G": "Green" };
+    const color = colorMap[colorCell.textContent[0]];
+    colorCell.textContent = viewMode === "mobile" ? color[0] : color;
+
+    const requirementCell = row.cells[3];
+    const reqimg = requirementCell.querySelector("img");
+    reqimg.classList.remove("requirement-image", "requirement-image-mobile");
+    reqimg.classList.add(viewMode === "mobile" ? "requirement-image-mobile" : "requirement-image");
+
+    const tagsCell = row.cells[4];
+    const tagimgs = tagsCell.querySelectorAll("img");
+    tagimgs.forEach((tagimg) => {
+      tagimg.classList.remove("tag-image", "tag-image-mobile");
+      tagimg.classList.add(viewMode === "mobile" ? "tag-image-mobile" : "tag-image");
+    })
+
+    const effectsCell = row.cells[5];
+    const effectimgs = effectsCell.querySelectorAll("img");
+    effectimgs.forEach((effectimg) => {
+      effectimg.classList.remove("effect-image", "effect-image-mobile");
+      effectimg.classList.add(viewMode === "mobile" ? "effect-image-mobile" : "effect-image");
+    })
+  });
 }
 
 initializeGame();
