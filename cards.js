@@ -2713,7 +2713,7 @@ const cards = [
     ],
     "effects": [
       "Heat",
-      "negHeat"
+      "Heatprod"
     ],
     "image": "images/cards/Imported GHG.webp",
     "requirement": "None"
