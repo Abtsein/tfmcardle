@@ -121,8 +121,7 @@ main {
   position: relative;
   width: 250px;
   text-align: left;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: -100px;
 }
 
 #results-card-code button {
@@ -148,7 +147,7 @@ main {
   position: absolute;
   top: 100%;
   left: 50%;
-  margin-top: -5px;
+  margin-top: -8px;
   transform: translateX(-50%); 
   width: min(300px, 80%);
   text-align: left;
@@ -482,7 +481,7 @@ td span {
   color: white;
 
   cursor: pointer;
-  font-size: 16px;
+  font-size: 12px;
   text-align: left;
 }
 
@@ -495,11 +494,19 @@ td span {
   background-color: #c1440e;
 }
 
-#random-code {
-  padding: 5px;
+#random-code,
+#plus-button,
+#minus-button {
+  padding: 7px;
   height: 30px;
   line-height: 1;
   font-size: 14px;
+  margin-top: 5px;
+}
+
+#plus-button,
+#minus-button {
+  width: 30px;
 }
 
 .close-button {
@@ -580,7 +587,6 @@ td span {
 
 .card-cost,
 .card-color {
-  font-family: "Rajdhani", sans-serif;
   color: black;
   font-weight: 700;
   font-size: 25px;

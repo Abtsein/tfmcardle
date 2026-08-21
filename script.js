@@ -6,6 +6,8 @@ let showMatches = localStorage.getItem("showMatches") || "show";
 let gameResult = [];
 let selectedIndex = -1;
 let solutionFromCode = null;
+let cardCode = null;
+let numberOfCodes = 1;
 let guessedCards = [];
 let matchesRemaining = [...cards];
 
@@ -76,8 +78,11 @@ const victoryModal = document.getElementById("victory-modal");
 const victoryMessage = document.getElementById("victory-message");
 const victoryCardImage = document.getElementById("victory-card-image");
 const shareButton = document.getElementById("share-button");
-const randomCodeButton = document.getElementById("random-code");
 const closeButton = document.getElementById("close-button");
+
+const randomCodeButton = document.getElementById("random-code");
+const plusButton = document.getElementById("plus-button");
+const minusButton = document.getElementById("minus-button");
 
 const defeatModal = document.getElementById("defeat-modal");
 const defeatMessage = document.getElementById("defeat-message");
@@ -169,6 +174,7 @@ const requirementImages = {
 document.querySelectorAll('input[name="mode"]').forEach(input => {
   input.addEventListener('change', (e) => {
     changeGameMode(e.target.value.toLowerCase());
+    startGame();
   });
 });
 
@@ -205,8 +211,11 @@ function setupEventListeners() {
   searchCardCode.addEventListener("keydown", handleSearchKeydownCardCode);
 
   shareButton.addEventListener("click", shareResult);
-  randomCodeButton.addEventListener("click", getRandomCode);
   closeButton.addEventListener("click", closeVictoryModal);
+  
+  randomCodeButton.addEventListener("click", getRandomCodes);
+  plusButton.addEventListener("click", () => changeNumberOfCodes(1));
+  minusButton.addEventListener("click", () => changeNumberOfCodes(-1));
 
   giveUpButton.addEventListener("click", showDefeatModal);
   closeDefeatButton.addEventListener("click", closeDefeatModal);
@@ -219,7 +228,7 @@ function setupEventListeners() {
   randomCardButton.addEventListener("click", handleRandomCardClick);
 
   enterCardCodeInput.addEventListener("input", (e) => {
-    if (e.target.value.length === 11) {
+    if (e.target.value.length >= 11) {
       readCode(e.target.value);
     }
   });
@@ -229,6 +238,8 @@ function openMenu() {
   menuModal.classList.remove("hidden");
   searchCardCode.placeholder = "Enter card name";
   enterCardCodeInput.placeholder = "Enter code";
+  numberOfCodes = 1;
+  randomCodeButton.textContent = "Get 1 random card's code";
 }
 
 function closeMenuModal() {
@@ -246,7 +257,8 @@ function changeGameMode(mode) {
   if (gameMode !== mode){
     gameMode = mode;
     localStorage.setItem("gameMode", gameMode);
-    startGame();
+    document.getElementById("infinite-mode").checked = (gameMode === "infinite");
+    document.getElementById("daily-mode").checked = (gameMode === "daily");
   }
 }
 
@@ -409,8 +421,11 @@ function createSuggestionButtonCardCode(card) {
 
   button.appendChild(name);
   button.addEventListener("click", () => {
-    getCode(card);
+    const code = getCode(card);
     searchCardCode.placeholder = "Code copied to clipboard!";
+    navigator.clipboard.writeText(code);
+    searchCardCode.value = "";
+    resultsCardCode.innerHTML = "";
   });
   return button;
 }
@@ -422,18 +437,32 @@ function getCode(card) {
   const code1 = (index + key) * primes1[Math.floor(Math.random() * primes1.length)];
   const code2 = (index + key) * primes2[Math.floor(Math.random() * primes2.length)];
   const code = `${code1}-${code2}`;
-  navigator.clipboard.writeText(code);
-  searchCardCode.value = "";
-  resultsCardCode.innerHTML = "";
+  return code;
 }
 
-function getRandomCode() {
-  const card = cards[Math.floor(Math.random() * cards.length)];
-  getCode(card);
-  randomCodeButton.textContent = "Code copied to clipboard!";
+function getRandomCodes() {
+  let clipboard = "";
+  const over1 = numberOfCodes !== 1;
+  for (let i = 0; i < numberOfCodes; i++) {
+    const card = cards[Math.floor(Math.random() * cards.length)];
+    if (i > 0) clipboard += "\n";
+    clipboard += getCode(card);
+  }
+  navigator.clipboard.writeText(clipboard);
+  randomCodeButton.textContent = `Code${over1 ? "s" : ""} copied to clipboard!`;
   setTimeout(() => {
-    randomCodeButton.textContent = "Get a random card's code";
+    const text = `Get ${numberOfCodes} random card${over1 ? "s'" : "'s"} code${over1 ? "s" : ""}`;
+    randomCodeButton.textContent = text;
   }, 1000);
+}
+
+function changeNumberOfCodes(a) {
+  if (numberOfCodes + a > 0 && numberOfCodes + a <= cards.length) {
+    numberOfCodes = numberOfCodes + a;
+    const over1 = numberOfCodes !== 1;
+    const text = `Get ${numberOfCodes} random card${over1 ? "s'" : "'s"} code${over1 ? "s" : ""}`;
+    randomCodeButton.textContent = text;
+  }
 }
 
 function handleSearchKeydown(event) {
@@ -539,6 +568,7 @@ function selectCard(card) {
 function startGame() {
   newGameButton.classList.add("hidden");
 
+  cardCode = null;
   solutionCard = getSolutionCard();
   guessedCards = [];
   cardsPlayed.textContent = "";
@@ -568,14 +598,25 @@ function startGame() {
 
 function readCode(code) {
   enterCardCodeInput.value = "";
+  if (code.length > 11 || !code.includes("-")) {
+    enterCardCodeInput.placeholder = "Invalid code";
+    return;
+  }
   const [code1, code2] = code.split("-").map(Number);
+  if (isNaN(code1) || isNaN(code2)) {
+    enterCardCodeInput.placeholder = "Invalid code";
+    return;
+  }
   const index = calculateGCD(code1, code2) - key;
   if (index > 0 && index <= cards.length) {
+    changeGameMode("infinite");
     closeMenuModal();
-    gameMode = "infinite";
     solutionFromCode = cards[index];
     startGame();
+    cardCode = code;
     solutionFromCode = null;
+  } else {
+    enterCardCodeInput.placeholder = "Invalid code";
   }
 }
 
@@ -1060,7 +1101,7 @@ function shareResult() {
   if (gameMode === "infinite") {
     resultText =
       `Terraforming Mars Cardle
-You found the card: ${solutionCard.name}
+You found the card: ${cardCode ? cardCode : solutionCard.name}
 
 ${gameResult.join("\n")}`;
   } else {

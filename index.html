@@ -8,9 +8,6 @@
 
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -271,11 +268,11 @@
         <label class="label-main"><strong>Game mode</strong></label>
         <div class="checkbox-group">
           <label>
-            <input type="radio" name="mode" value="infinite" checked>
+            <input id="infinite-mode" type="radio" name="mode" value="infinite" checked>
             Infinite
           </label>
           <label>
-            <input type="radio" name="mode" value="daily">
+            <input id="daily-mode" type="radio" name="mode" value="daily">
             Daily
           </label>
         </div>
@@ -300,11 +297,12 @@
             type="text"
             autocomplete="off"
           >
-          <div id="results-card-code"></div>
           <div>
             <button id="random-code" type="button">
-              Get a random card's code
+              Get 1 random card's code
             </button>
+            <button id="plus-button" type="button">+</button>
+            <button id="minus-button" type="button">-</button>
           </div>
           <label>Play with a code</label>
           <div>
@@ -315,6 +313,7 @@
           >
           </div>
         </div>
+        <div id="results-card-code"></div>
       </div>
     </div>
   </div>
