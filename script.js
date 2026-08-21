@@ -2,25 +2,81 @@ let solutionCard;
 let attempts = 0;
 let gameMode = localStorage.getItem("gameMode") || "infinite";
 let viewMode = localStorage.getItem("viewMode") || "normal";
-let showMatches = localStorage.getItem("showMatches") !== "false";
+let showMatches = localStorage.getItem("showMatches") || "show";
 let gameResult = [];
 let selectedIndex = -1;
+let solutionFromCode = null;
 let guessedCards = [];
 let matchesRemaining = [...cards];
 
 const debugSolution = document.getElementById("debug-solution");
 const searchInput = document.getElementById("search-input");
 const results = document.getElementById("results");
+const searchCardCode = document.getElementById("search-card-code");
+const resultsCardCode = document.getElementById("results-card-code");
+const enterCardCodeInput = document.getElementById("enter-card-code");
 const history = document.getElementById("history");
 const matchesCount = document.getElementById("matchesCount");
 const cardsPlayed = document.getElementById("cards-list");
+const key = 769;
 const MAX_ATTEMPTS = 5;
 const FORCED_SOLUTION_NAME = null;
+const acronyms = {
+  "psc": "Power Supply Consortium",
+  "dwh": "Deep Well Heating",
+  "se": "Space Elevator",
+  "aaa": "Aerobraked Ammonia Asteroid",
+  "lht": "Local Heat Trapping",
+  "nra": "Nitrogen-Rich Asteroid",
+  "ics": "Interstellar Colony Ship",
+  "bi": "Building Industries",
+  "ro": "Research Outpost",
+  "subres": "Subterranean Reservoir",
+  "gsm": "Giant Space Mirror",
+  "lc": "Large Convoy",
+  "eo": "Earth Office",
+  "stech": "Standard Technology",
+  "steve": "Standard Technology",
+  "ec": "Earth Catapult",
+  "dets": "Underground Detonations",
+  "gh": "Greenhouses",
+  "oa": "Optimal Aerobraking",
+  "ez": "Ecological Zone",
+  "ecozone": "Ecological Zone",
+  "swp": "Solar Wind Power",
+  "tom": "Cloud Seeding",
+  "gia": "Giant Ice Asteroid",
+  "aa": "Arctic Algae",
+  "nrb": "Nitrite Reducing Bacteria",
+  "habs": "Protected Habitats",
+  "selfsabo": "Protected Habitats",
+  "wsp": "Water Splitting Plant",
+  "bpd": "Black Polar Dust",
+  "bfat": "Beam from a Thorium Asteroid",
+  "tg": "Terraforming Ganymede",
+  "tggg": "Terraforming Ganymede",
+  "nz": "Nuclear Zone",
+  "nuke": "Nuclear Zone",
+  "gc": "Ganymede Colony",
+  "amc": "Asteroid Mining Consortium",
+  "cows": "Livestock",
+  "agt": "Anti-Gravity Technology",
+  "pv": "Protected Valley",
+  "pi": "Power Infrastructure",
+  "ecf": "Extreme-Cold Fungus",
+  "sats": "Satellites",
+  "am": "Asteroid Mining",
+  "sfl": "Search for Life",
+  "wife": "Water Import from Europa",
+  "ra": "Restricted Area",
+  "thread": "Tundra Farming"
+};
 
 const victoryModal = document.getElementById("victory-modal");
 const victoryMessage = document.getElementById("victory-message");
 const victoryCardImage = document.getElementById("victory-card-image");
 const shareButton = document.getElementById("share-button");
+const randomCodeButton = document.getElementById("random-code");
 const closeButton = document.getElementById("close-button");
 
 const defeatModal = document.getElementById("defeat-modal");
@@ -35,19 +91,6 @@ const closeInfo = document.getElementById("close-info");
 const menuButton = document.getElementById("menu-button");
 const menuModal = document.getElementById("menu-modal");
 const closeMenu = document.getElementById("close-menu");
-
-const dropdownToggleMode = document.getElementById("dropdown-toggle-mode");
-const dropdownListMode = document.getElementById("dropdown-list-mode");
-const dropdownSelectedMode = document.getElementById("dropdown-selected-mode");
-
-const dropdownToggleView = document.getElementById("dropdown-toggle-view");
-const dropdownListView = document.getElementById("dropdown-list-view");
-const dropdownSelectedView = document.getElementById("dropdown-selected-view");
-
-const dropdownToggleMatches = document.getElementById('dropdown-toggle-matches');
-const dropdownListMatches = document.getElementById('dropdown-list-matches');
-const dropdownSelectedMatches = document.getElementById('dropdown-selected-matches');
-const showMatchesButtons = document.querySelectorAll('[data-show-matches]');
 
 const giveUpButton = document.getElementById("give-up-button");
 const newGameButton = document.getElementById("new-game-button");
@@ -123,6 +166,24 @@ const requirementImages = {
   None: "images/symbols/none.png"
 };
 
+document.querySelectorAll('input[name="mode"]').forEach(input => {
+  input.addEventListener('change', (e) => {
+    changeGameMode(e.target.value.toLowerCase());
+  });
+});
+
+document.querySelectorAll('input[name="view"]').forEach(input => {
+  input.addEventListener('change', (e) => {
+    changeView(e.target.value.toLowerCase());
+  });
+});
+
+document.querySelectorAll('input[name="matches"]').forEach(input => {
+  input.addEventListener('change', (e) => {
+    changeShowMatches(e.target.value.toLowerCase());
+  });
+});
+
 function initializeGame() {
   setupEventListeners();
   startGame();
@@ -133,42 +194,6 @@ function setupEventListeners() {
   closeMenu.addEventListener("click", closeMenuModal);
   menuModal.addEventListener("click", handleMenuOutsideClick);
 
-  dropdownToggleMode.addEventListener("click", () => {
-    dropdownListMode.classList.toggle("hidden");
-  });
-
-  dropdownListMode.querySelectorAll("button").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      changeGameMode(btn.dataset.mode);
-      dropdownListMode.classList.add("hidden");
-    });
-  });
-
-  dropdownToggleView.addEventListener("click", () => {
-    dropdownListView.classList.toggle("hidden");
-  });
-
-  dropdownListView.querySelectorAll("button").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      changeView(btn.dataset.view);
-      dropdownListView.classList.add("hidden");
-    });
-  });
-  
-  dropdownToggleMatches.addEventListener('click', () => {
-    dropdownListMatches.classList.toggle("hidden");
-  });
-
-  showMatchesButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      showMatches = button.dataset.showMatches === "true";
-      localStorage.setItem("showMatches", showMatches);
-      updateShowMatchesText();
-      dropdownListMatches.classList.add("hidden");
-      document.getElementById("matchesCount").style.display = showMatches ? "block" : "none";
-    });
-  });
-
   infoButton.addEventListener("click", openInfoModal);
   closeInfo.addEventListener("click", closeInfoModal);
   infoModal.addEventListener("click", handleInfoOutsideClick);
@@ -176,7 +201,11 @@ function setupEventListeners() {
   searchInput.addEventListener("input", handleSearchInput);
   searchInput.addEventListener("keydown", handleSearchKeydown);
 
+  searchCardCode.addEventListener("input", handleSearchInputCardCode);
+  searchCardCode.addEventListener("keydown", handleSearchKeydownCardCode);
+
   shareButton.addEventListener("click", shareResult);
+  randomCodeButton.addEventListener("click", getRandomCode);
   closeButton.addEventListener("click", closeVictoryModal);
 
   giveUpButton.addEventListener("click", showDefeatModal);
@@ -188,13 +217,18 @@ function setupEventListeners() {
   newGameButton.addEventListener("click", startNewGame);
 
   randomCardButton.addEventListener("click", handleRandomCardClick);
+
+  enterCardCodeInput.addEventListener("input", (e) => {
+    if (e.target.value.length === 11) {
+      readCode(e.target.value);
+    }
+  });
 }
 
 function openMenu() {
   menuModal.classList.remove("hidden");
-  updateDropdownModeText();
-  updateShowMatchesText();
-  updateDropdownViewText();
+  searchCardCode.placeholder = "Enter card name";
+  enterCardCodeInput.placeholder = "Enter code";
 }
 
 function closeMenuModal() {
@@ -206,18 +240,12 @@ function handleMenuOutsideClick(event) {
   if (event.target === menuModal) {
     closeMenuModal();
   }
-  if (!event.target.closest(".dropdown")) {
-    dropdownListMode.classList.add("hidden");
-    dropdownListMatches.classList.add("hidden");
-    dropdownListView.classList.add("hidden");
-  }
 }
 
 function changeGameMode(mode) {
   if (gameMode !== mode){
     gameMode = mode;
     localStorage.setItem("gameMode", gameMode);
-    updateDropdownModeText();
     startGame();
   }
 }
@@ -226,7 +254,6 @@ function changeView(view) {
   if (viewMode !== view){
     viewMode = view;
     localStorage.setItem("viewMode", viewMode);
-    updateDropdownViewText();
     
     if (attempts !== 0) {
       document.querySelectorAll(".card-column").forEach(el => {
@@ -246,19 +273,12 @@ function changeView(view) {
   }
 }
 
-function updateDropdownModeText() {
-  const modeName = gameMode === "daily" ? "Daily" : "Infinite";
-  dropdownSelectedMode.textContent = modeName;
-}
-
-function updateDropdownViewText() {
-  const viewName = viewMode === "normal" ? "Normal" : "Mobile";
-  dropdownSelectedView.textContent = viewName;
-}
-
-function updateShowMatchesText() {
-  const text = showMatches ? "Yes" : "No";
-  dropdownSelectedMatches.textContent = text;
+function changeShowMatches(show) {
+  if (showMatches !== show) {
+    showMatches = show;
+    localStorage.setItem("showMatches", showMatches);
+    matchesCount.style.display = showMatches === "show" ? "block" : "none";
+  }
 }
 
 function openInfoModal() {
@@ -286,6 +306,8 @@ function handleSearchInput() {
     return;
   }
 
+  const acronymMatch = acronyms[searchText]
+
   const filteredCards = cards
     .filter(card =>
       card.name.toLowerCase().includes(searchText)
@@ -303,8 +325,16 @@ function handleSearchInput() {
 
       return nameA.localeCompare(nameB);
     });
+  
+  if (acronymMatch) {
+    acronymCard = cards.find(
+        card => card.name === acronymMatch
+      );
+    filteredCards.unshift(acronymCard);
+  }
 
-  filteredCards.forEach(card => {
+  filteredCards.slice(0, 5).forEach(card => {
+    console.log("Création bouton pour:", card.name);
     const button = createSuggestionButton(card);
     results.appendChild(button);
   });
@@ -323,6 +353,87 @@ function createSuggestionButton(card) {
   button.addEventListener("click", () => selectCard(card));
 
   return button;
+}
+
+function handleSearchInputCardCode() {
+  const searchText = searchCardCode.value.toLowerCase();
+
+  resultsCardCode.innerHTML = "";
+  selectedIndex = 0;
+
+  if (!searchText) {
+    return;
+  }
+
+  const acronymMatch = acronyms[searchText]
+
+  const filteredCards = cards
+    .filter(card =>
+      card.name.toLowerCase().includes(searchText)
+    )
+    .sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+
+      const positionA = a.name.toLowerCase().indexOf(searchText);
+      const positionB = b.name.toLowerCase().indexOf(searchText);
+      
+      if (positionA !== positionB) {
+        return positionA - positionB;
+      }
+
+      return nameA.localeCompare(nameB);
+    });
+  
+  if (acronymMatch) {
+    acronymCard = cards.find(
+        card => card.name === acronymMatch
+      );
+    filteredCards.unshift(acronymCard);
+  }
+
+  filteredCards.slice(0, 3).forEach(card => {
+    const button = createSuggestionButtonCardCode(card);
+    resultsCardCode.appendChild(button);
+  });
+
+  updateSelectedSuggestion(resultsCardCode.querySelectorAll(".card"));
+}
+
+function createSuggestionButtonCardCode(card) {
+  const button = document.createElement("button");
+  button.classList.add("card");
+
+  const name = document.createElement("span");
+  name.textContent = card.name;
+
+  button.appendChild(name);
+  button.addEventListener("click", () => {
+    getCode(card);
+    searchCardCode.placeholder = "Code copied to clipboard!";
+  });
+  return button;
+}
+
+function getCode(card) {
+  const index = cards.findIndex(c => c.name === card.name)
+  const primes1 = [17, 23, 31, 41, 47, 59, 67, 73, 83, 97];
+  const primes2 = [19, 29, 37, 43, 53, 61, 71, 79, 89, 101];
+  const code1 = (index + key) * primes1[Math.floor(Math.random() * primes1.length)];
+  const code2 = (index + key) * primes2[Math.floor(Math.random() * primes2.length)];
+  const code = `${code1}-${code2}`;
+  navigator.clipboard.writeText(code);
+  searchCardCode.value = "";
+  resultsCardCode.innerHTML = "";
+}
+
+function getRandomCode() {
+  const card = cards[Math.floor(Math.random() * cards.length)];
+  getCode(card);
+  randomCodeButton.textContent = "Code copied to clipboard!";
+  setTimeout(() => {
+    randomCodeButton.textContent = "Get a random card's code";
+  }, 1000);
 }
 
 function handleSearchKeydown(event) {
@@ -361,6 +472,42 @@ function updateSelectedSuggestion(suggestions) {
   });
 }
 
+function handleSearchKeydownCardCode(event) {
+  const suggestions = resultsCardCode.querySelectorAll(".card");
+
+  if (suggestions.length === 0) {
+    return;
+  }
+
+  if (event.key === "ArrowDown") {
+    event.preventDefault();
+    selectedIndex = (selectedIndex + 1) % suggestions.length;
+    updateSelectedSuggestionCardCode(suggestions);
+  }
+
+  if (event.key === "ArrowUp") {
+    event.preventDefault();
+    selectedIndex--;
+
+    if (selectedIndex < 0) {
+      selectedIndex = suggestions.length - 1;
+    }
+
+    updateSelectedSuggestionCardCode(suggestions);
+  }
+
+  if (event.key === "Enter" && selectedIndex >= 0) {
+    event.preventDefault();
+    suggestions[selectedIndex].click();
+  }
+}
+
+function updateSelectedSuggestionCardCode(suggestions) {
+  suggestions.forEach((suggestion, index) => {
+    suggestion.classList.toggle("selected", index === selectedIndex);
+  });
+}
+
 function selectCard(card) {
   attempts++;
   addGuess(card);
@@ -376,7 +523,7 @@ function selectCard(card) {
 
   if (card.name === solutionCard.name) {
     searchInput.disabled = true;
-    document.getElementById("matchesCount").style.display = "none";
+    matchesCount.style.display = "none";
     showVictoryModal();
     return;
   }
@@ -397,7 +544,7 @@ function startGame() {
   cardsPlayed.textContent = "";
   matchesRemaining = [...cards];
   matchesCount.textContent = `Matches remaining: ${matchesRemaining.length}`;
-  document.getElementById("matchesCount").style.display = showMatches ? "block" : "none";
+  matchesCount.style.display = showMatches === "show" ? "block" : "none";
   attempts = 0;
 
   document.querySelectorAll(".card-column").forEach(el => {
@@ -419,6 +566,26 @@ function startGame() {
   searchInput.focus();
 }
 
+function readCode(code) {
+  enterCardCodeInput.value = "";
+  const [code1, code2] = code.split("-").map(Number);
+  const index = calculateGCD(code1, code2) - key;
+  if (index > 0 && index <= cards.length) {
+    closeMenuModal();
+    gameMode = "infinite";
+    solutionFromCode = cards[index];
+    startGame();
+    solutionFromCode = null;
+  }
+}
+
+function calculateGCD(a, b) {
+  while (b !== 0) {
+    [a, b] = [b, a % b];
+  }
+  return a;
+}
+
 function getSolutionCard() {
   if (FORCED_SOLUTION_NAME) {
     const forcedCard = cards.find(
@@ -428,6 +595,10 @@ function getSolutionCard() {
     if (forcedCard) {
       return forcedCard;
     }
+  }
+  
+  if (solutionFromCode) {
+    return solutionFromCode;
   }
 
   return gameMode === "daily"
@@ -998,7 +1169,7 @@ function updateTableView() {
     costCell.appendChild(costCellText(arrow, cost));
 
     const colorCell = row.cells[2];
-    const colorMap = { "R": "Red", "B": "Blue", "G": "Green" };
+    const colorMap = {"R": "Red", "B": "Blue", "G": "Green"};
     const color = colorMap[colorCell.textContent[0]];
     colorCell.textContent = viewMode === "mobile" ? color[0] : color;
 

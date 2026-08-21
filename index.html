@@ -53,14 +53,12 @@
         >
           <img src="images/symbols/restart.png" alt="New game">
         </button>
-
         <input
           id="search-input"
           type="text"
           autocomplete="off"
           autofocus
         >
-
         <button
           id="give-up-button"
           class="give-up-button"
@@ -78,6 +76,7 @@
         title="Random move">
           <img src="images/symbols/random.png" alt="Random card">
         </button>
+        <div id="results"></div>
       </div>
 
       <div id="matchesCount" class="matches-count">Matches remaining : 215</div>
@@ -85,8 +84,6 @@
       <div id="cardsPlayed" class="cards-played">
         <span id="cards-list"></span>
       </div>
-
-      <div id="results"></div>
 
       <table id="cards-table">
         <thead>
@@ -172,7 +169,7 @@
     aria-modal="true"
     aria-labelledby="info-title"
   >
-    <div class="modal-content">
+    <div class="info-content">
       <button
         id="close-info"
         class="close-button"
@@ -189,7 +186,6 @@
         to the hidden card to find it!<br>You have 5 guesses maximum.
         <br>Base + Prelude 1 project cards only.
       </p>
-
       <p>
         The "Tags" and "Effects" categories tell you what tags and effects
         are shared by your card and the hidden card.
@@ -197,7 +193,6 @@
         <br>A category is partially correct (orange background) if it shares at least one item with the hidden card.
         <br>A category is incorrect (red background) if it shares no item with the hidden card.
       </p>
-
       <p>
         All possible effects (separated by commas) are:
         <br>gaining MC, losing/paying MC or removing MC to a player, gaining MC production, reducing any MC production 
@@ -213,29 +208,24 @@
           https://github.com/Abtsein/tfmcardle
         </a>
       </p>
-
       <p>
         All effects count. Immediate effects, permanent effects from blue cards,
         action effects from blue cards, and also the cost of actions from blue cards 
         (Equatorial Magnetizer has the negative power production effect).
       </p>
-
       <p>
         Cards can only have an effect once 
         (Research only has 1 card draw effect, Sponsors only has 1 MC production effect).
       </p>
-
       <p>
         Negative production effects are the same if they affect you or other players 
         (Food factory and Fish have the same negative plant production effect).
       </p>
-
       <p>
         All possible effects of a card are used.
-        <br>For example, Imported Hydrogen's effects are Ocean, Plant, Microbe and Animal,
+        For example, Imported Hydrogen's effects are Ocean, Plant, Microbe and Animal,
         and Hired Raiders' are MC gain, MC loss, steel gain, and steel loss.
       </p>
-
       <p class="info-footer">
         Huge thanks to OrrinW01 from Reddit for their work on the card images available at 
         <a href="https://tm.hadronikle.com" target="_blank" rel="noopener noreferrer">
@@ -249,7 +239,6 @@
       </p>
     </div>
   </div>
-
   <div
     id="menu-modal"
     class="modal hidden"
@@ -257,49 +246,76 @@
     aria-modal="true"
     aria-labelledby="menu-title"
   >
-    <div class="modal-content">
-      <button
-        id="close-menu"
-        class="close-button"
-        type="button"
-        aria-label="Close menu"
-      >
-        ×
-      </button>
-
-      <h2 id="menu-title">Settings</h2>
-
-      <label>Game mode</label>
-      <div class="dropdown">
-        <button id="dropdown-toggle-mode" type="button">
-          <span id="dropdown-selected-mode">Infinite</span> ▾
+    <div class="menu-content">
+      <div>
+        <button
+          id="close-menu"
+          class="close-button"
+          type="button"
+          aria-label="Close menu"
+        >
+          ×
         </button>
-        <div id="dropdown-list-mode" class="dropdown-menu hidden">
-          <button type="button" data-mode="infinite">Infinite</button>
-          <button type="button" data-mode="daily">Daily</button>
+
+        <label class="label-main"><strong>View</strong></label>
+        <div class="checkbox-group">
+          <label>
+            <input type="radio" name="view" value="normal" checked>
+            Normal
+          </label>
+          <label>
+            <input type="radio" name="view" value="mobile">
+            Mobile
+          </label>
+        </div>
+        <label class="label-main"><strong>Game mode</strong></label>
+        <div class="checkbox-group">
+          <label>
+            <input type="radio" name="mode" value="infinite" checked>
+            Infinite
+          </label>
+          <label>
+            <input type="radio" name="mode" value="daily">
+            Daily
+          </label>
+        </div>
+        <label class="label-main"><strong>Matches remaining</strong></label>
+        <div class="checkbox-group">
+          <label>
+            <input type="radio" name="matches" value="show" checked>
+            Show
+          </label>
+          <label>
+            <input type="radio" name="matches" value="hide">
+            Hide
+          </label>
         </div>
       </div>
-      <label>Show number of remaining matches</label>
-      <div class="dropdown">
-        <button id="dropdown-toggle-matches" type="button">
-          <span id="dropdown-selected-matches">Yes</span> ▾
-        </button>
-        <div id="dropdown-list-matches" class="dropdown-menu hidden">
-          <button type="button" data-show-matches="true">Yes</button>
-          <button type="button" data-show-matches="false">No</button>
+      <div>
+        <label class="label-main"><strong>Card codes</strong></label>
+        <label>Generate your card's code</label>
+        <div class="card-codes">
+          <input
+            id="search-card-code"
+            type="text"
+            autocomplete="off"
+          >
+          <div id="results-card-code"></div>
+          <div>
+            <button id="random-code" type="button">
+              Get a random card's code
+            </button>
+          </div>
+          <label>Play with a code</label>
+          <div>
+            <input
+            id="enter-card-code"
+            type="text"
+            autocomplete="off"
+          >
+          </div>
         </div>
       </div>
-      <label>View</label>
-      <div class="dropdown">
-        <button id="dropdown-toggle-view" type="button">
-          <span id="dropdown-selected-view">Normal</span> ▾
-        </button>
-        <div id="dropdown-list-view" class="dropdown-menu hidden">
-          <button type="button" data-view="normal">Normal</button>
-          <button type="button" data-view="mobile">Mobile</button>
-        </div>
-      </div>
-
     </div>
   </div>
 

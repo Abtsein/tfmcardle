@@ -75,7 +75,6 @@ main {
   position: relative;
   width: 100%;
   height: 55px;
-  margin-bottom: 10px;
 }
 
 #search-input {
@@ -84,7 +83,7 @@ main {
   left: 50%;
   transform: translateX(-50%);
 
-  width: min(300px, 90%);
+  width: min(300px, 80%);
   padding: 12px;
 
   border: 1px solid #888;
@@ -94,21 +93,68 @@ main {
   font-size: 16px;
 }
 
+#search-card-code {
+  width: 250px;
+  height: 30px;
+  padding: 7px;
+
+  border: 1px solid #888;
+  border-radius: 4px;
+
+  font-family: inherit;
+  font-size: 12px;
+}
+
+#enter-card-code {
+  width: 125px;
+  height: 30px;
+  padding: 7px;
+
+  border: 1px solid #888;
+  border-radius: 4px;
+
+  font-family: inherit;
+  font-size: 12px;
+}
+
+#results-card-code {
+  position: relative;
+  width: 250px;
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#results-card-code button {
+  pointer-events: auto;
+}
+
 .matches-count,
 .cards-played {
   text-align: center;
-  font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
+.matches-count {
+  font-size: 20px;
+}
+
+.cards-played {
+  font-size: 16px;
+}
+
 #results {
-  width: min(326px, 90%);
-  margin: 0 auto;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-top: -5px;
+  transform: translateX(-50%); 
+  width: min(300px, 80%);
   text-align: left;
 }
 
-.card {
+#results .card {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -125,11 +171,11 @@ main {
   text-align: left;
 }
 
-.card:hover {
-  background-color: #333;
+#results .card:hover {
+  background-color: #b95429;
 }
 
-.card.selected {
+#results .card.selected {
   outline: 2px solid white;
   background-color: #c1440e;
 }
@@ -354,7 +400,6 @@ td span {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 
   width: 100%;
   max-width: 1000px;
@@ -367,13 +412,94 @@ td span {
   text-align: center;
 }
 
-.modal-content h2 {
-  color: white;
+.info-content {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 90%;
+  max-width: 1000px;
+  padding: 30px;
+
+  border: 2px solid white;
+  border-radius: 12px;
+  background-color: #19162a;
+
+  text-align: left;
+
+  max-height: 90vh;
+  overflow-y: auto;
+  padding-right: 10px;
 }
 
-#info-modal h2 {
-  font-weight: bold;
+#info-title {
   text-align: center;
+}
+
+.menu-content {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+
+  width: 100%;
+  max-width: 750px;
+  padding: 20px 20px 40px 40px;
+
+  border: 2px solid white;
+  border-radius: 12px;
+  background-color: #19162a;
+
+  text-align: left;
+}
+
+.menu-content > div:first-of-type {
+  border-right: 1px solid;
+  border-image: linear-gradient(to bottom, transparent, #888, transparent) 1;
+  padding-right: 20px;
+}
+
+.menu-content > div:last-of-type {
+  padding-left: 20px;
+}
+
+.card-codes {
+  position: relative;
+}
+
+#results-card-code .card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  width: 100%;
+  padding: 10px;
+
+  border: 1px solid #ccc;
+  background-color: #242424;
+  color: white;
+
+  cursor: pointer;
+  font-size: 16px;
+  text-align: left;
+}
+
+#results-card-code .card:hover {
+  background-color: #b95429;
+}
+
+#results-card-code .card.selected {
+  outline: 2px solid white;
+  background-color: #c1440e;
+}
+
+#random-code {
+  padding: 5px;
+  height: 30px;
+  line-height: 1;
+  font-size: 14px;
 }
 
 .close-button {
@@ -395,7 +521,9 @@ td span {
 }
 
 .modal-content button:not(.close-button),
-.modal-actions button {
+.modal-actions button,
+.menu-content button:not(.close-button),
+.menu-actions button {
   padding: 10px 15px;
   cursor: pointer;
 }
@@ -509,15 +637,41 @@ td span {
   background: #f0f0f0;
 }
 
-.modal-content label {
+.checkbox-group {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-bottom: 15px;
+  margin-top: -10px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: left;
+  cursor: pointer;
+}
+
+.checkbox-group input {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+.checkbox-group input[type="radio"] {
+  accent-color: #c1440e;
+}
+
+.menu-content .label-main {
   display: block;
-  margin-top: 15px;
-  margin-bottom: 8px;
+  margin-top: 10px;
   font-size: 24px;
 }
 
-#searchInput {
-  padding-left: 40px; /* Espace pour le compteur */
+.menu-content label:not(.label-main) {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 16px;
 }
 
 @media (max-width: 800px) {
